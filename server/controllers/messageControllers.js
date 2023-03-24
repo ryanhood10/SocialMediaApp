@@ -1,26 +1,26 @@
-const { User, Thought, reactionSchema } = require('../models')
+const { User, Message } = require('../models')
 
 
 module.exports = {
 
-    // Get all thoughts
-    getThoughts(req, res) {
-        Thought
+    // Get all messages
+    getMessages(req, res) {
+        Message
             .find()
-            .then((thoughts) => res.json(thoughts))
+            .then((messages) => res.json(messages))
     },
 
-    // Get a single thought
-    getSingleThought(req, res) {
+    // Get a single message
+    getSingleMessage(req, res) {
         // find a user by it's Id
-        Thought.findById(req.params.thoughtId)
-            // populate the user portion of thoughts
+        Message.findById(req.params.messageId)
+            // populate the user portion of messages
             .populate('user')
-            .then((thoughts) => {
-                if (!thoughts) {
-                    return res.status(404).json({ message: 'No thought found with that ID' });
+            .then((messages) => {
+                if (!messages) {
+                    return res.status(404).json({ message: 'No message found with that ID' });
                 }
-                res.json(thoughts);
+                res.json(messages);
             })
             .catch((err) => {
                 console.log(err);
@@ -29,11 +29,11 @@ module.exports = {
     },
 
 
-    // Create a new thought 
-     async createThought(req, res) {
+    // Create a new Message 
+     async createMessage(req, res) {
         try {
-            // Create a new thought using the request body
-            const newThought = await Thought.create(req.body);
+            // Create a new message using the request body
+            const newMessage = await Message.create(req.body);
 
             // Find the user with the associated username
             const currentUser = await User.findOne({ username: req.body.username });
@@ -42,14 +42,14 @@ module.exports = {
                 return res.status(404).json({ message: "User not found" });
             }
         
-            // Push the thought's _id to the user's thoughts array
-            currentUser.thoughts.push(newThought._id);
+            // Push the messages' _id to the user's messages array
+            currentUser.messages.push(newMessage._id);
 
             // Save the updated user
             currentUser.save();
 
-            // Return the created thought
-            return res.status(201).json(newThought);
+            // Return the created message
+            return res.status(201).json(newMessage);
             
         } catch (err) {
             console.error(err);
@@ -57,18 +57,18 @@ module.exports = {
         }            
     },
 
-    // updating thought
-    updateThought(req, res) {
-        Thought.findOneAndUpdate(
-            { _id: req.params.thoughtId },
+    // updating Message
+    updateMessage(req, res) {
+        Message.findOneAndUpdate(
+            { _id: req.params.messageId },
             { $set: req.body },
             { runValidators: true, new: true }
 
-            .then((thought) => {
-                if (!thought) {
-                    res.status(404).json({ message: 'No thought with this ID exist' })
+            .then((messages) => {
+                if (!messages) {
+                    res.status(404).json({ message: 'No message with this ID exist' })
                 }
-                res.json(thought)
+                res.json(messages)
             })
             .catch((err) => {
                 console.log(err);
@@ -76,14 +76,14 @@ module.exports = {
             })
     )},
  
-    // delete thought
-    deleteThought(req, res) {
-        Thought.findByIdAndDelete(req.params.thoughtId)
-            .then((deletedThought) => {
-                if (!deletedThought) {
-                    return res.status(404).json({ message: 'No thought found with that ID' });
+    // delete Message
+    deleteMessage(req, res) {
+        Message.findByIdAndDelete(req.params.MessageId)
+            .then((deletedMessage) => {
+                if (!deletedMessage) {
+                    return res.status(404).json({ message: 'No message found with that ID' });
                 }
-                res.json(deletedThought);
+                res.json(deletedMessage);
             })
             .catch((err) => {
                 console.log(err);

@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models'); 
+const { User, Message } = require('../models'); 
 
 
 
@@ -19,7 +19,7 @@ module.exports = {
     getSingleUser(req, res) {
         // find a user by it's Id
         User.findById(req.params.userId)
-            // populate the thoughts portion of User
+            // populate the message portion of User
             .populate('thoughts')
             // populate the friends portion of User
             .populate('friends')

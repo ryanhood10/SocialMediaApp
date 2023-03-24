@@ -1,6 +1,6 @@
-const User = require('./user')
-const Thought = require('./thought')
-const reactionSchema = require('./reaction')
+const User = require('./User')
+const Message = require('./Message')
+const Reply = require('./Reply')
 
-module.exports = {User, Thought, reactionSchema}
+module.exports = {User, Message, Reply}
 
