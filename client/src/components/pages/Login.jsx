@@ -1,4 +1,4 @@
-
+import Signup from './pages/Signup';
 
 
 
