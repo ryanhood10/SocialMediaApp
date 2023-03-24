@@ -70,6 +70,7 @@ const resolvers = {
     },
   
     addMessage: async (parent, args, context) => {
+      // spread opporator should copy args and then append username to it to give it a user to refer to.  
       if (context.user) {
         const message = await Message.create({ ...args, username: context.user.username });
   
@@ -87,6 +88,7 @@ const resolvers = {
   
     addReply: async (parent, { messageId, replyBody }, context) => {
       if (context.user) {
+        // replyBody should give what a user's response is and then append the username to it to identify the person replying
         const updatedMessage = await Message.findOneAndUpdate(
           { _id: messageId },
           { $push: { replies: { replyBody, username: context.user.username } } },
