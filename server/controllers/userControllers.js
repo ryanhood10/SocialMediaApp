@@ -1,3 +1,5 @@
+// BACKEND REFERENCE
+
 const { User, Message } = require('../models'); 
 
 
@@ -20,7 +22,7 @@ module.exports = {
         // find a user by it's Id
         User.findById(req.params.userId)
             // populate the message portion of User
-            .populate('thoughts')
+            .populate('messages')
             // populate the friends portion of User
             .populate('friends')
             .then((user) => {
@@ -64,10 +66,10 @@ module.exports = {
     // delete a User
     deleteUser(req, res) {
         User.deleteOne()
-            .then(({ thoughts }) => {
-                return Thought.updateMany(
-                    { _id: { $in: thoughts } },
-                    { $pull: { reactions: { username: req.params.userId } } },
+            .then(({ messages }) => {
+                return Message.updateMany(
+                    { _id: { $in: messages } },
+                    { $pull: { replys: { username: req.params.userId } } },
                     { new: true }
                 );
             })
@@ -118,7 +120,7 @@ module.exports = {
                     return current_user.save()
                 }
             })
-            .then((current_user) => {
+            .then(() => {
                 res.json({ message: 'Friend was successfully removed' });
             })
             .catch((err) => {

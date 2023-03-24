@@ -1,8 +1,10 @@
+// BACKEND REFERENCE
+
 const router = require('express').Router();
-const thought_routes = require('./thoughts');
+const message_routes = require('./messages');
 const user_routes = require('./users');
 
-router.use('/thoughts', thought_routes); 
+router.use('/messages', message_routes); 
 router.use('/users', user_routes);
 
 

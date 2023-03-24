@@ -1,3 +1,5 @@
+// BACKEND REFERENCE
+
 const { User, Message } = require('../models')
 
 
@@ -27,7 +29,6 @@ module.exports = {
                 res.status(500).json(err);
             })
     },
-
 
     // Create a new Message 
      async createMessage(req, res) {

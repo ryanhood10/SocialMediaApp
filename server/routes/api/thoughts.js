@@ -1,21 +1,20 @@
+// BACKEND REFERENCE
+
 const router = require('express').Router();
 // all the functions are listed on the parsed out routes
 const {
-    getThoughts,
-    getSingleThought,
-    createThought,
-    updateThought,
-    deleteThought  
-} = require('../../controllers/thoughtControllers')
+    getMessages,
+    getSingleMessage,
+    createMessage,
+    updateMessage,
+    deleteMessage  
+} = require('../../controllers/messageControllers')
 
 
 // // /api/users
-router.route('/').get(getThoughts).post(createThought);
+router.route('/').get(getMessages).post(createMessage);
 
 // // /api/users/:userId
-router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought)
-
-// // /api/users/:userId/friends/friendId
-router.route('/:thoughtId/reactions').post().delete()
+router.route('/:thoughtId').get(getSingleMessage).put(updateMessage).delete(deleteMessage)
 
 module.exports = router

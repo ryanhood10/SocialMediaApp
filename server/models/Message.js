@@ -24,7 +24,7 @@ const messageSchema = new Schema({
         // Thought.find().populate('username').exec(function(err, thoughts) {
         // });
     },
-    reply: [replySchema]
+    replies: [replySchema]
 },
 {
     toJSON: {
@@ -35,8 +35,8 @@ const messageSchema = new Schema({
   }
 );
 
-messageSchema.virtual('reactionCount').get(function () {
-    return this.reply.length;
+messageSchema.virtual('replyCount').get(function () {
+    return this.replies.length;
 });
 const Message = model('Message', messageSchema)
 

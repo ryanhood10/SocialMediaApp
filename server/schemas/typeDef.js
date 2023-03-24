@@ -1,55 +1,71 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Query {
-    me: User
-  }
-
-  type Query {
-    users: [User]
-  }
-  
   type User {
-    _id: ID
+    id: ID!
     username: String!
     email: String!
     password: String!
+    messages: [Message!]!
+    friends: [User!]!
+    friendCount: Int!
   }
 
-  input UserInput {
+  type Message {
+    id: ID!
+    MessageText: String!
+    createdAt: String!
     username: String!
-    email: String!
-    password: String!
+    replies: [Reply!]!
+    replyCount: Int!
   }
 
-  type Book {
-    authors: [String]
-    description: String!
-    bookId: String!
-    image: String
-    link: String
-    title: String!
-  }
-
-  input BookInput {
-    authors: [String]
-    description: String!
-    bookId: String!
-    image: String
-    link: String
-    title: String!
+  type Reply {
+    id: ID!
+    replyBody: String!
+    createdAt: String!
+    username: String!
   }
 
   type Auth {
     token: ID!
-    user: User
+    user: User!
+  }
+
+  input SignupInput {
+    username: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
+  input MessageInput {
+    MessageText: String!
+  }
+
+  input ReplyInput {
+    replyBody: String!
+  }
+
+  type Query {
+    me: User
+    users: [User!]!
+    user(username: String!): User
+    messages: [Message!]!
+    message(id: ID!): Message
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
-    addUser(userData: UserInput!): Auth
-    saveBook(bookData: BookInput!): User
-    removeBook(bookId: ID!): User
+    login(input: LoginInput!): Auth!
+    signup(input: SignupInput!): Auth!
+    createMessage(input: MessageInput!): Message!
+    deleteMessage(id: ID!): Message
+    createReply(messageId: ID!, input: ReplyInput!): Reply!
+    deleteReply(messageId: ID!, replyId: ID!): Message
   }
 `;
 
