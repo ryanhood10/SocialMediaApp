@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../assets/login.css'
 import logo from '../../assets/images/sn.png'
-// import Signup from './Signup'
+import { Link } from 'react-router-dom'
 
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
 
 
               <main className='main'>
-                <form>
+                <form className='theform'>
                   <div className="form-outline mb-4">
                     <input type="email" id="form3Example3" className="form-control form-control-lg"
                       placeholder="Enter a valid email address" />
@@ -48,9 +48,9 @@ export default function Login() {
                   <div className="text-center text-lg-start mt-4 pt-2">
                     <button type="button" className="btn btn-primary btn-lg btnlog"
                     >Login</button>
-                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href='/Signup'
-                      className="link-danger">Register</a></p>
-                      
+                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  
+                    <Link to='/Signup' className="link-danger"> Register</Link></p>
+                    
 
 
                   </div>
@@ -64,7 +64,7 @@ export default function Login() {
 
         <footer>
           <ul>
-            <li>© 2023 WordOnTheStreet</li>
+            <li>Welcome to WordOnTheStreet</li>
           </ul>
 
 
