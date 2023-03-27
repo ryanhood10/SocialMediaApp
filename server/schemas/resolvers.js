@@ -33,20 +33,20 @@ const resolvers = {
         .populate('friends');
     },
   
-    // get all thoughts
+    // get all messages
     messages: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Message.find(params).sort({ createdAt: -1 });
     },
   
-    // get a thought by id
+    // get a message by id
     message: async (parent, { messageId }) => {
       return Message.findOne({ _id: messageId });
     },
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
+    signup: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
   
@@ -68,8 +68,19 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
+    logout: async (parent, args, context) => {
+      if (context.user) {
+        // Clear the JWT cookie on the client by setting an expired cookie
+        context.res.clearCookie('jwt');
   
-    addMessage: async (parent, args, context) => {
+        return { message: 'Successfully logged out' };
+      }
+  
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  
+    createMessage: async (parent, args, context) => {
       // spread opporator should copy args and then append username to it to give it a user to refer to.  
       if (context.user) {
         const message = await Message.create({ ...args, username: context.user.username });
@@ -86,7 +97,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
   
-    addReply: async (parent, { messageId, replyBody }, context) => {
+    createReply: async (parent, { messageId, replyBody }, context) => {
       if (context.user) {
         // replyBody should give what a user's response is and then append the username to it to identify the person replying
         const updatedMessage = await Message.findOneAndUpdate(
@@ -114,7 +125,66 @@ const resolvers = {
   
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    deleteMessage: async (parent, { messageId }, context) => {
+      if (context.user) {
+        const message = await Message.findOne({ _id: messageId });
+  
+        if (!message) {
+          throw new Error('Message not found');
+        }
+  
+        // Check if the user is the owner of the message
+        if (message.username !== context.user.username) {
+          throw new AuthenticationError('You are not authorized to delete this message');
+        }
+  
+        await Message.deleteOne({ _id: messageId });
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { messages: messageId } }
+        );
+  
+        return { message: 'Message successfully deleted' };
+      }
+  
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  
+    deleteReply: async (parent, { messageId, replyId }, context) => {
+      if (context.user) {
+        const message = await Message.findOne({ _id: messageId });
+  
+        if (!message) {
+          throw new Error('Message not found');
+        }
+  
+        const reply = message.replies.id(replyId);
+  
+        if (!reply) {
+          throw new Error('Reply not found');
+        }
+  
+        // Check if the user is the owner of the reply
+        if (reply.username !== context.user.username) {
+          throw new AuthenticationError('You are not authorized to delete this reply');
+        }
+  
+        await reply.remove();
+        await message.save();
+  
+        return { message: 'Reply successfully deleted' };
+      }
+  
+      throw new AuthenticationError('You need to be logged in!');
+    }   
   },
 };
+
+
+
+
+  
+
 
 module.exports = resolvers;
