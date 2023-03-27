@@ -1,15 +1,43 @@
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+
+
+.loginBody {
+    background-color: rgba(114, 110, 110, 0.08);
 }
-.h-custom {
-height: calc(100% - 73px);
+
+.logoimg {
+    width: 100%;
+    margin-top: 2%;
 }
-@media (max-width: 450px) {
-.h-custom {
-height: 100%;
+
+form {
+    border: solid 8px rgb(251, 180, 3);
+    border-radius: 12%;
+    border-style: inset;
+    background-color: rgba(231, 136, 12, 0.181);
+    padding: 10%;
+    position: inherit;
+    margin-top: 8%;
 }
+
+.btnlog {
+    margin: 1px;
+    font-size: 17px;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #efb002;
+    text-align: center;
+    padding: 35px;
+    font-weight: 700;
+    text-decoration: none;
+
+  }
+
+  footer li {
+    list-style: none;
+  }
+  
