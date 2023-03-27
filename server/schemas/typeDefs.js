@@ -43,6 +43,11 @@ const typeDefs = gql`
     password: String!
   }
 
+  type LogoutResponse {
+    success: Boolean!
+    message: String
+  }
+
   input MessageInput {
     MessageText: String!
   }
@@ -59,13 +64,16 @@ const typeDefs = gql`
     message(id: ID!): Message
   }
 
+
   type Mutation {
     login(input: LoginInput!): Auth!
     signup(input: SignupInput!): Auth!
+    logout: LogoutResponse!
     createMessage(input: MessageInput!): Message!
     deleteMessage(id: ID!): Message
     createReply(messageId: ID!, input: ReplyInput!): Reply!
     deleteReply(messageId: ID!, replyId: ID!): Message
+    addFriend(friendId: ID!): User!
   }
 `;
 

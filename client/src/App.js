@@ -1,6 +1,7 @@
+import React from "react";
 import { HashRouter, Routes, Route  } from 'react-router-dom'
 import './App.css';
-import React from "react";
+
 
 // pages import
 // import Homepage from './components/pages/Homepage';
