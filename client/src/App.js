@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter, Routes, Route  } from 'react-router-dom'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './App.css';
 
 
@@ -13,10 +14,15 @@ import Signup from './components/pages/Signup';
 // import Header from './components/Header'
 // import Footer from './components/Footer'
 
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
     <>
+    <ApolloProvider client={client}>
       <div className="App">
 
         <HashRouter>
@@ -35,6 +41,7 @@ function App() {
 
 
       </div>
+      </ApolloProvider>
     </>
 
   );

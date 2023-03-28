@@ -74,6 +74,7 @@ const typeDefs = gql`
     createReply(messageId: ID!, input: ReplyInput!): Reply!
     deleteReply(messageId: ID!, replyId: ID!): Message
     addFriend(friendId: ID!): User!
+    removeFriend(friendId: ID!:): User!
   }
 `;
 
