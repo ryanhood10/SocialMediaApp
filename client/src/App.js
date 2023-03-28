@@ -25,10 +25,9 @@ function App() {
 
               <Route exact path='/' element={<Login />} />
               <Route exact path='/Signup' element={<Signup />} />
-
-              {/* <Route path='/Homepage' element={<Homepage />} />
-              <Route path='/Profile' element={<Profile />} />
-              <Route path='/Search' element={<Search />} /> */}
+              {/* <Route exact path='/Homepage' element={<Homepage />} /> */}
+              {/* <Route path='/Profile' element={<Profile />} /> */}
+              {/* <Route path='/Search' element={<Search />} /> */}
             </Routes>
           
         </HashRouter>
