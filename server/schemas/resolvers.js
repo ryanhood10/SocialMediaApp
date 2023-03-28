@@ -126,6 +126,30 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    removeFriend: async (parent, { friendId }, context) => {
+      try {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { friends: friendId } },
+            { new: true }
+          ).populate('friends');
+    
+          if (!updatedUser) {
+            throw new Error('User not found');
+          }
+    
+          return updatedUser;
+        }
+        
+        throw new AuthenticationError('You must be logged in to remove a friend');
+      } catch (err) {
+        console.log(err);
+        throw new Error('Failed to remove friend');
+      }
+    },
+    
+
     deleteMessage: async (parent, { messageId }, context) => {
       if (context.user) {
         const message = await Message.findOne({ _id: messageId });
@@ -177,7 +201,7 @@ const resolvers = {
       }
   
       throw new AuthenticationError('You need to be logged in!');
-    }   
+    }
   },
 };
 
