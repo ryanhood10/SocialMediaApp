@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../assets/login.css'
 import logo from '../../assets/images/sn.png'
 import { Link } from 'react-router-dom'
 
 
 export default function Login() {
+
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const [validationErrors, setValidationErrors] = useState({
+      email: false,
+      password: false,
+    });
+  
+    const handleOnChange = (event) => {
+      const { name, value } = event.target;
+  
+      if (name === 'email') setEmail(value);
+      if (name === 'password') setPassword(value);
+      
+    }
+  
+    const handleOnClick = () => {
+      if (email.length < 1) {
+        setValidationErrors({
+          ...validationErrors,
+          name: true
+        });
+      } else {
+        setValidationErrors({
+          ...validationErrors,
+          name: false,
+        });
+      }
+    }
   return (
 
     <div className='loginBody'>
@@ -22,32 +53,22 @@ export default function Login() {
               <main className='main'>
                 <form className='theform'>
                   <div className="form-outline mb-4">
-                    <input type="email" id="form3Example3" className="form-control form-control-lg"
-                      placeholder="Enter a valid email address" />
+                    
+                      <input value={email} onChange={(event) => { handleOnChange(event) }} type="text" id="email" name="email" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your email'></input>
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
                   <div className="form-outline mb-3">
-                    <input type="password" id="form3Example4" className="form-control form-control-lg"
-                      placeholder="Enter password" />
+                  
+                      <input value={password} onChange={(event) => { handleOnChange(event) }} type="password" id="password" name="password" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your password'></input>
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
 
-                  <div className="d-flex justify-content-between align-items-center">
-
-                    <div className="form-check mb-0">
-                      <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                      <label className="form-check-label" htmlFor="form2Example3">
-                        Remember me
-                      </label>
-                    </div>
-
-                  </div>
+                  
 
                   <div className="text-center text-lg-start mt-4 pt-2">
-                    <button type="button" className="btn btn-primary btn-lg btnlog"
-                    >Login</button>
+                    <button type="button" onClick={handleOnClick} className="btn btn-primary btn-lg btnlog">Login</button>
                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  
                     <Link to='/Signup' className="link-danger"> Register</Link></p>
                     
