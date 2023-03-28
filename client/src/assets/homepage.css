@@ -1,0 +1,52 @@
+.homepageBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .sideNav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    color: #4e2f2f;
+    overflow-x: hidden;
+    padding-top: 200px;
+  }
+  
+  .sideNav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    margin: 10px;
+  }
+  
+  .sideNav li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    color: grey;
+    list-style: none;
+    margin-top: 50px;
+  }
+  
+  .sideNav li:last-child {
+    border-bottom: none;
+  }
+  
+  .sideNav a {
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .sideNav a:hover {
+    background-color: #ddd;
+  }
+  
