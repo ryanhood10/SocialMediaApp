@@ -39,7 +39,7 @@ export default function Login() {
   return (
 
     <div className='loginBody'>
-   
+
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -55,12 +55,12 @@ export default function Login() {
                   <div className="form-outline mb-4">
                     
                       <input value={email} onChange={(event) => { handleOnChange(event) }} type="text" id="email" name="email" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your email'></input>
+
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
-                  <div className="form-outline mb-3">
-                  
+                  <div className="form-outline mb-3">              
                       <input value={password} onChange={(event) => { handleOnChange(event) }} type="password" id="password" name="password" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your password'></input>
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
@@ -71,9 +71,6 @@ export default function Login() {
                     <button type="button" onClick={handleOnClick} className="btn btn-primary btn-lg btnlog">Login</button>
                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  
                     <Link to='/Signup' className="link-danger"> Register</Link></p>
-                    
-
-
                   </div>
 
                 </form>
@@ -92,7 +89,7 @@ export default function Login() {
         </footer>
       </section>
 
-   
+
 
     </div>
 
