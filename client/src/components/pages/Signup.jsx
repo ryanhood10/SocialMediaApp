@@ -1,18 +1,36 @@
 import React, { useState } from 'react';
 import '../../assets/signup.css'
 import logo2 from '../../assets/images/sn.png'
+import { useMutation } from '@apollo/client';
+import { SIGNUP } from '../../utils/mutations';
 
-const Signup = () => {
+// CHANGE: changed signup to SignupForm to enable the variable signup to be used within it.
+const SignupForm = () => {
 
-  const [fullName, setFullName] = useState('');
-  // const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  // implementation of SIGNUP mutation
+  const [signup] = useMutation(SIGNUP)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Signup form submitted:', { fullName, email, password });
-    // Here you can submit the form data to your backend or do other actions
+    // try catch used for the mutation
+    try {
+      const data = await signup({
+        variables: { input: { username: username, email: email, password: password } },
+      });
+      console.log(data)
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      window.location.href = "http://localhost:3000/";
+    }
+     catch (err) {
+      console.error(err);
+    }
+
   };
 
   return (
@@ -32,24 +50,43 @@ const Signup = () => {
                   <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
-                      <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} id="form3Example1c" placeholder='Your Full Name' className="form-control" />
-                      <label  className="form-label" for="form3Example1c"></label>
+                      <input 
+                      type="text" 
+                      value={username} 
+                      onChange={(e) => setUsername(e.target.value)} 
+                      id="form3Example1c" 
+                      placeholder='Your Username' 
+                      className="form-control" 
+                      />
+                      <label  className="form-label" htmlFor="form3Example1c"></label>
                     </div>
                   </div>
 
                   <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
-                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}  id="form3Example3c" placeholder='Your Email' className="form-control" />
-                      <label className="form-label" for="form3Example3c"></label>
+                      <input 
+                      type="email" 
+                      value={email} onChange={(e) => setEmail(e.target.value)}  
+                      id="form3Example3c" 
+                      placeholder='Your Email' 
+                      className="form-control" 
+                      />
+                      <label className="form-label" htmlFor="form3Example3c"></label>
                     </div>
                   </div>
 
                   <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
-                      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}  id="form3Example4c" placeholder='Password' className="form-control" />
-                      <label className="form-label" for="form3Example4c"></label>
+                      <input 
+                      type="password" 
+                      value={password} onChange={(e) => setPassword(e.target.value)}  
+                      id="form3Example4c" 
+                      placeholder='Password' 
+                      className="form-control" 
+                      />
+                      <label className="form-label" htmlFor="form3Example4c"></label>
                     </div>
                   </div>
 
@@ -57,13 +94,13 @@ const Signup = () => {
                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input type="password" id="form3Example4cd" placeholder='Repeat your password' className="form-control" />
-                      <label className="form-label" for="form3Example4cd"></label>
+                      <label className="form-label" htmlFor="form3Example4cd"></label>
                     </div>
                   </div>
 
                   <div className="form-check d-flex justify-content-center mb-5">
                     <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label className="form-check-label" for="form2Example3">
+                    <label className="form-check-label" htmlFor="form2Example3">
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
                   </div>
@@ -90,4 +127,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupForm;

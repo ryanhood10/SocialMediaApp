@@ -22,22 +22,34 @@ export default function Login() {
               <main className='main'>
                 <form className='theform'>
                   <div className="form-outline mb-4">
-                    <input type="email" id="form3Example3" className="form-control form-control-lg"
-                      placeholder="Enter a valid email address" />
+                    <input 
+                    type="email" 
+                    id="form3Example3" 
+                    className="form-control form-control-lg"
+                    placeholder="Enter a valid email address"
+                    />
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
                   <div className="form-outline mb-3">
-                    <input type="password" id="form3Example4" className="form-control form-control-lg"
-                      placeholder="Enter password" />
+                    <input 
+                    type="password" 
+                    id="form3Example4" 
+                    className="form-control form-control-lg"
+                    placeholder="Enter password" 
+                    />
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
 
                   <div className="d-flex justify-content-between align-items-center">
 
                     <div className="form-check mb-0">
-                      <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                      <input 
+                      className="form-check-input me-2" 
+                      type="checkbox" 
+                      value="" 
+                      id="form2Example3" />
                       <label className="form-check-label" htmlFor="form2Example3">
                         Remember me
                       </label>
