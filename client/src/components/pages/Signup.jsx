@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../assets/signup.css'
 import logo2 from '../../assets/images/sn.png'
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom'
 import { SIGNUP } from '../../utils/mutations';
 
 // CHANGE: changed signup to SignupForm to enable the variable signup to be used within it.
@@ -10,6 +11,8 @@ const SignupForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate()
 
   // implementation of SIGNUP mutation
   const [signup] = useMutation(SIGNUP)
@@ -25,7 +28,7 @@ const SignupForm = () => {
       setUsername('');
       setEmail('');
       setPassword('');
-      window.location.href = "http://localhost:3000/";
+      navigate("/");
     }
     catch (err) {
       console.error(err);
