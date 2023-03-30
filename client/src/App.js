@@ -28,7 +28,6 @@ function App() {
           <HashRouter>
             
               <Routes>
-
                 <Route exact path='/' element={<Login />} />
                 <Route exact path='/Signup' element={<Signup />} />
 
@@ -38,7 +37,6 @@ function App() {
               </Routes>
             
           </HashRouter>
-
 
         </div>
       </ApolloProvider>
