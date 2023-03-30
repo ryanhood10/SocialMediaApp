@@ -1,0 +1,79 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fbc2eb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+    }
+
+    /* MY CSS */
+
+    .firstRow {
+        background-color: rgba(45, 77, 136, 0.641);
+        height: 200px;
+        position: relative;
+        height: fit-content;
+        
+    }
+
+    .secondRow {
+        width: 150px;
+
+    }
+
+    .firstImg {
+        width: 110%;
+        z-index: 1;
+        border: solid 1px rgb(11, 93, 26);
+        border-radius: 3%;
+        margin-bottom: 0%;
+        
+    }
+
+    .firstBtn {
+        z-index: 1;
+        margin-top: 20%;
+    }
+
+    .thirdRow  {
+        margin-top: 18%;
+        padding-left: 5%;
+    }
+
+    .fourthRow {
+        background-color: rgba(45, 77, 136, 0.641);
+        position: inherit;
+    }
+
+    .fifthRow {
+        background-color: rgba(44, 44, 137, 0.193);
+        border-radius: 3%;
+    }
+
+    .uploadPhoto {
+        position: relative;
+        margin-top: 1%;
+        display: none;
+
+        
+    }
+
+    .uploadBtn {
+        padding: 1%;        
+        margin: 2%;
+    }
+
+    .uploadBtn button {
+        border-radius: 6%;
+        background-color: #fbc2eb;
+        width: fit-content;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .uploadBtn button:hover {
+        background-color: orange;
+        
+    }
