@@ -1,45 +1,81 @@
 import React, { useState } from 'react'
 import '../../assets/login.css'
 import logo from '../../assets/images/Login.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../utils/mutations';
 
 
-export default function Login() {
 
-    
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-  
-    const [validationErrors, setValidationErrors] = useState({
-      email: false,
-      password: false,
-    });
-  
-    const handleOnChange = (event) => {
-      const { name, value } = event.target;
-  
-      if (name === 'email') setEmail(value);
-      if (name === 'password') setPassword(value);
-      
+export default function LoginFunction() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // implementing login mutation
+  const [login] = useMutation(LOGIN);
+  const navigate = useNavigate()
+
+
+  const [validationErrors, setValidationErrors] = useState({
+    email: false,
+    password: false,
+  });
+
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'email') setEmail(value);
+    if (name === 'password') setPassword(value);
+  };
+
+  // this is what is happening on a click
+  const handleOnClick = async () => {
+    if (email.length < 1) {
+      setValidationErrors({
+        ...validationErrors,
+        email: true
+      });
+    } else {
+      setValidationErrors({
+        ...validationErrors,
+        email: false,
+      });
     }
-  
-    const handleOnClick = () => {
-      if (email.length < 1) {
-        setValidationErrors({
-          ...validationErrors,
-          name: true
-        });
-      } else {
-        setValidationErrors({
-          ...validationErrors,
-          name: false,
-        });
-      }
+
+    if (password.length < 1) {
+      setValidationErrors({
+        ...validationErrors,
+        password: true
+      });
+    } else {
+      setValidationErrors({
+        ...validationErrors,
+        password: false,
+      });
     }
+
+    try {
+      const data = await login({
+        variables: { input: { email: email, password: password } },
+      });
+      console.log(data)
+      setEmail('');
+      setPassword('');
+      navigate("/Homepage")
+      // window.location.href = "http://localhost:3000/homepage";
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+
+
+
   return (
 
     <div className='loginBody'>
-   
+
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -53,27 +89,40 @@ export default function Login() {
               <main className='main'>
                 <form className='theform'>
                   <div className="form-outline mb-4">
-                    
-                      <input value={email} onChange={(event) => { handleOnChange(event) }} type="text" id="email" name="email" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your email'></input>
+
+                    <input
+                      value={email}
+                      onChange={(event) => { handleOnChange(event) }}
+                      type="text"
+                      id="email"
+                      name="email"
+                      className={`form-control ${validationErrors.email ? 'is-invalid' : ''}`}
+                      placeholder='Enter your email'>
+                    </input>
+
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
                   <div className="form-outline mb-3">
-                  
-                      <input value={password} onChange={(event) => { handleOnChange(event) }} type="password" id="password" name="password" className={`form-control ${validationErrors.name ? 'is-invalid' : ''}`} placeholder='Enter your password'></input>
+                    <input
+                      value={password}
+                      onChange={(event) => { handleOnChange(event) }}
+                      type="password"
+                      id="password"
+                      name="password"
+                      className={`form-control ${validationErrors.password ? 'is-invalid' : ''}`}
+                      placeholder='Enter your password'>
+                    </input>
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
 
-                  
+
 
                   <div className="text-center text-lg-start mt-4 pt-2">
                     <button type="button" onClick={handleOnClick} className="btn btn-primary btn-lg btnlog">Login</button>
-                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  
-                    <Link to='/Signup' className="link-danger"> Register</Link></p>
-                    
-
-
+                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+                      <Link to='/Signup' className="link-danger"> Register</Link></p>
                   </div>
 
                 </form>
@@ -92,7 +141,7 @@ export default function Login() {
         </footer>
       </section>
 
-   
+
 
     </div>
 
