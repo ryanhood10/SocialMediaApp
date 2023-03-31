@@ -31,7 +31,7 @@
     font-size: 16px;
   }
   
-  button[type="submit"] {
+  .AuthButton {
     background-color: #4CAF50;
     color: rgb(255, 255, 255);
     padding: 10px 20px;
@@ -43,7 +43,7 @@
     transition: all 0.3s ease-in-out;
   }
   
-  button[type="submit"]:hover {
+  .AuthButton:hover {
     background-color: #3e8e41;
     color: black;
   }
