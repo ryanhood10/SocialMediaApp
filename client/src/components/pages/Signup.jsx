@@ -109,7 +109,7 @@ const SignupForm = () => {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" className="btn btn-primary btn-lg thebtn">Register</button>
+                        <button type="submit" className="btn btn-primary btn-lg thebtn AuthButton">Register</button>
                       </div>
 
                     </form>

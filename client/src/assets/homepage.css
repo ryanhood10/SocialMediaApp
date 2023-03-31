@@ -1,8 +1,12 @@
+
+
+
 .homepageBody {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: grey;
   }
   
   .sideNav {
@@ -38,7 +42,6 @@
   }
   
   .sideNav a {
-    display: block;
     color: #333;
     padding: 8px 16px;
     text-decoration: none;
@@ -131,6 +134,7 @@
   margin-bottom: 10px;
   background-color: white;
   border: white;
+  padding-left: 25px;
 }
 
 .newPostButton {
@@ -166,4 +170,30 @@
   padding: 20px;
   width: 80%;
   max-width: 600px
+}
+
+.post {
+  border-color: #333;
+    outline: #333;
+    margin-top: 75px;
+    width: 300px;
+    margin-left: 775px;
+    border: solid;
+    border-radius: 10px;
+    box-shadow: green 0 0 5px;
+    background: #e7e5e5
+}
+
+body {
+  background-color: rgb(194, 207, 194);
+}
+.post p {
+  margin: 10px;
+  margin-bottom: 1rem;
+  cursor: pointer
+}
+
+.fileInput {
+  cursor: pointer;
+  width: 10px;
 }

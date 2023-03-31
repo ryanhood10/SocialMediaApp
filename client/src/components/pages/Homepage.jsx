@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../assets/homepage.css';
 import { FaSearch, FaHome, FaPaperclip } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { FiPlus, FiSend } from 'react-icons/fi';
+import '../../assets/homepage.css';
 
 export default function Homepage() {
   const [showPostCard, setShowPostCard] = useState(false);
@@ -25,14 +25,15 @@ export default function Homepage() {
   };
 
   return (
-    <header className='header'>
-      <form className='searchForm'>
-        <input type='text' placeholder='Search' className='searchInput' />
-        <button type='submit' className='searchButton'>
-          <FaSearch className='searchIcon' />
-        </button>
-      </form>
-
+    <>
+      <header className='header'>
+        <form className='searchForm'>
+          <input type='text' placeholder='Search' className='searchInput' />
+          <button type='submit' className='searchButton'>
+            <FaSearch className='searchIcon' />
+          </button>
+        </form>
+      </header>
       <nav className='sideNav'>
         <ul>
           <li>
@@ -52,7 +53,6 @@ export default function Homepage() {
           </li>
         </ul>
       </nav>
-
       {showPostCard && (
         <div className='cardWrapper'>
           <div className='card'>
@@ -60,26 +60,29 @@ export default function Homepage() {
             <form onSubmit={handlePostSubmit}>
               <textarea placeholder='Write something...' className='postInput' name='postInput'></textarea>
               <br />
+              <div className='postbuttons'>
               <label htmlFor="fileInput" className='fileInput'>
                 <FaPaperclip className='paperclipIcon' />
+                <input type="file" id="fileInput" accept="image/*" style={{display: 'none'}} />
               </label>
-              <input type="file" id="fileInput" accept="image/*" />
               <button type='submit' className='postButton'>
                 <FiSend className='postIcon' />
               </button>
+              </div>
             </form>
           </div>
         </div>
       )}
-
-      <div className='postList'>
-        {posts.map((post, index) => (
-          <div className='post' key={index}>
-            <p>{post.content}</p>
-            <p>{post.date}</p>
-          </div>
-        ))}
-      </div>
-    </header>
+      <>
+        <form className='postList'>
+          {posts.map((post, index) => (
+            <section className='post' key={index}>
+              <p>{post.content}</p>
+              <p>{post.date}</p>
+            </section>
+          ))}
+        </form>
+      </>
+    </>
   );
 }

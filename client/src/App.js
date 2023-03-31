@@ -11,7 +11,7 @@ import './App.css';
 import Homepage from './components/pages/Homepage';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
-// import Profile from './components/pages/Profile';
+import Profile from './components/pages/Profile';
 
 // import Search from './components/pages/Search';
 // header and footer imports
@@ -36,7 +36,7 @@ function App() {
                 <Route exact path='/' element={<Login />} />
                 <Route exact path='/Signup' element={<Signup />} />
                 <Route path='/Homepage' element={<Homepage />} />
-                {/* <Route path='/Profile' element={<Profile />} /> */}
+                <Route path='/Profile' element={<Profile />} />
                 {/* <Route path='/Search' element={<Search />} /> */}
               </Routes>
             
