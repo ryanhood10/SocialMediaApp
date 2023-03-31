@@ -56,7 +56,7 @@ class AuthService {
       window.location.assign('/');
     } catch (error) {
       console.error('Error during authentication:', error);
-      // Handle the error, e.g., show an error message to the user
+      // Handle the error, e.g., show an error message to the user asdflasjkf
     }
   }
 
