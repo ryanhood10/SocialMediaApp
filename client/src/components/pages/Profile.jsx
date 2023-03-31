@@ -62,7 +62,7 @@ export default function Profile() {
 
 
   return (
-
+<>
 <header className='header'>
         <form className='searchForm'>
           <input type='text' placeholder='Search' className='searchInput' />
@@ -178,6 +178,8 @@ export default function Profile() {
 
 
     </section>
+
+    </>
   )
 
 }

@@ -98,7 +98,7 @@ export default function LoginFunction() {
 
 
               <main className='main'>
-                <form className='theform' onSubmit={handleSubmit}>
+                <form className='theform' onSubmit={handleOnClick}>
                   <div className="form-outline mb-4">
 
 
