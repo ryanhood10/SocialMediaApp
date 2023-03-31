@@ -5,11 +5,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 
+import authService from '../../utils/auth'
 
 
 export default function LoginFunction() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
 
   // implementing login mutation
   const [login] = useMutation(LOGIN);
@@ -54,6 +56,18 @@ export default function LoginFunction() {
       });
     }
 
+    //Ryans Authentication token service
+    try {
+      const response = await authService.login(email, password);
+      if (response && response.token) {
+        navigate('/Homepage'); // Replace '/' with the actual route you want to navigate to
+      } else {
+        alert('Login failed. Please check your email and password.');
+      }
+    } catch (error) {
+      alert('An error occurred during login. Please try again.');
+    }
+
     try {
       const data = await login({
         variables: { input: { email: email, password: password } },
@@ -68,9 +82,6 @@ export default function LoginFunction() {
       console.error(err);
     }
   }
-
-
-
 
   return (
 
@@ -87,8 +98,10 @@ export default function LoginFunction() {
 
 
               <main className='main'>
-                <form className='theform'>
+                <form className='theform' onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
+
+
 
                     <input
                       value={email}
@@ -100,11 +113,14 @@ export default function LoginFunction() {
                       placeholder='Enter your email'>
                     </input>
 
+
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
                   <div className="form-outline mb-3">
+
+
                     <input
                       value={password}
                       onChange={(event) => { handleOnChange(event) }}
@@ -114,15 +130,15 @@ export default function LoginFunction() {
                       className={`form-control ${validationErrors.password ? 'is-invalid' : ''}`}
                       placeholder='Enter your password'>
                     </input>
+
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
-
-
 
                   <div className="text-center text-lg-start mt-4 pt-2">
                     <button type="button" onClick={handleOnClick} className="btn btn-primary btn-lg btnlog">Login</button>
                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                       <Link to='/Signup' className="link-danger"> Register</Link></p>
+
                   </div>
 
                 </form>

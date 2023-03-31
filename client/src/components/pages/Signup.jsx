@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
 import '../../assets/signup.css'
 import logo2 from '../../assets/images/sn.png'
+
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'
 import { SIGNUP } from '../../utils/mutations';
-
+import AuthService from '../../utils/auth.js';
 // CHANGE: changed signup to SignupForm to enable the variable signup to be used within it.
 const SignupForm = () => {
 
   const [username, setUsername] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigate = useNavigate()
+  const authService = new AuthService();
+  const navigate = useNavigate();
 
   // implementation of SIGNUP mutation
   const [signup] = useMutation(SIGNUP)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //try catch for user token authentication servuce
+    try {
+      const response = await authService.signup({ username, email, password });
+      if (response && response.token) {
+        navigate('/'); // Navigate to the home page
+      } else {
+        alert('Signup failed. Please check your information and try again.');
+      }
+    } catch (error) {
+      alert('An error occurred during signup. Please try again.');
+    }
     // try catch used for the mutation
     try {
       const data = await signup({
@@ -28,13 +41,13 @@ const SignupForm = () => {
       setUsername('');
       setEmail('');
       setPassword('');
-      navigate("/");
+      navigate("/Homepage");
     }
     catch (err) {
       console.error(err);
     }
-
   };
+
 
   return (
     <section className="vh-100" >
@@ -109,7 +122,7 @@ const SignupForm = () => {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="submit" className="btn btn-primary btn-lg thebtn">Register</button>
+                        <button type="submit" className="btn btn-primary btn-lg thebtn AuthButton">Register</button>
                       </div>
 
                     </form>

@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import logo from '../../assets/images/Login.png';
 import '../../assets/profile.css';
+import { FaSearch, FaHome } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const [profilePicture, setProfilePic] = useState(null);
   const fileInputRef = useRef(null);
+
   // const [isFollowing, setIsFollowing] = useState(false);
   const [bio, setBio] = useState('');
+
 
   // function that trigger the input file whenever
   function handleFileUpload(event) {
@@ -57,6 +62,31 @@ export default function Profile() {
 
 
   return (
+
+<header className='header'>
+        <form className='searchForm'>
+          <input type='text' placeholder='Search' className='searchInput' />
+          <button type='submit' className='searchButton'>
+            <FaSearch className='searchIcon' />
+          </button>
+        </form>
+
+        <nav className='sideNav'>
+          <ul>
+            <li>
+              <Link to='/Homepage'>
+                <FaHome className='homeIcon' />
+              </Link>
+            </li>
+            <li>
+              <Link to='/Profile'>
+                <CgProfile className='profileIcon' />
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      
     <section className="h-100 gradient-custom-2">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
@@ -107,34 +137,37 @@ export default function Profile() {
                   <div className="p-4 fifthRow">
                     <input type="text" className="form-control mb-2" value={bio} onChange={handleBioChange} placeholder="Write something about yourself" />
                     <button className="btn btn-primary" onClick={handleSaveBio}>Save Bio</button>
-                  </div>
+                    
+                    </div>
                 </div>
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                  <p className="lead fw-normal mb-0">Recent photos</p>
-                  <p className="mb-0">
-                    <a href="#!" className="text-muted">
-                      Show all
-                    </a>
-                  </p>
-                </div>
-                <div className="row g-2">
-                  <div className="col mb-2">
-                    <img
-                      src={logo}
-                      alt="img 1"
-                      className="w-100 rounded-3"
-                    />
-                  </div>
-                  <div className="col mb-2">
-                    <img
-                      src={logo}
-                      alt="img 1"
-                      className="w-100 rounded-3"
-                    />
-                  </div>
-                </div>
+    
+      
 
-
+                 
+                  <div className="d-flex justify-content-between align-items-center mb-4">
+                    <p className="lead fw-normal mb-0">Recent photos</p>
+                    <p className="mb-0">
+                      <a href="#!" className="text-muted">
+                        Show all
+                      </a>
+                    </p>
+                  </div>
+                  <div className="row g-2">
+                    <div className="col mb-2">
+                      <img
+                        src={logo}
+                        alt="img 1"
+                        className="w-100 rounded-3"
+                      />
+                    </div>
+                    <div className="col mb-2">
+                      <img
+                        src={logo}
+                        alt="img 1"
+                        className="w-100 rounded-3"
+                      />
+                    </div>
+                  </div>
 
 
               </div>
@@ -145,7 +178,6 @@ export default function Profile() {
 
 
     </section>
-
   )
 
 }
