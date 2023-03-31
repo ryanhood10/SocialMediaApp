@@ -47,22 +47,22 @@ const resolvers = {
 
   Mutation: {
     signup: async (parent, args) => {
-      const user = await User.create(args);
+      const user = await User.create(args.input);
       const token = signToken(user);
   
       return { token, user };
     },
   
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { input }) => {
+      const user = await User.findOne({ email: input.email });
       if (!user) {
-        throw new AuthenticationError('Incorrect email or password');
+        throw new AuthenticationError('Incorrect email');
       }
   
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(input.password);
   
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect email or password');
+        throw new AuthenticationError('Incorrect password');
       }
   
       const token = signToken(user);
@@ -126,6 +126,30 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    removeFriend: async (parent, { friendId }, context) => {
+      try {
+        if (context.user) {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { friends: friendId } },
+            { new: true }
+          ).populate('friends');
+    
+          if (!updatedUser) {
+            throw new Error('User not found');
+          }
+    
+          return updatedUser;
+        }
+        
+        throw new AuthenticationError('You must be logged in to remove a friend');
+      } catch (err) {
+        console.log(err);
+        throw new Error('Failed to remove friend');
+      }
+    },
+    
+
     deleteMessage: async (parent, { messageId }, context) => {
       if (context.user) {
         const message = await Message.findOne({ _id: messageId });
@@ -177,7 +201,7 @@ const resolvers = {
       }
   
       throw new AuthenticationError('You need to be logged in!');
-    }   
+    }
   },
 };
 

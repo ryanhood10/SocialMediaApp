@@ -6,24 +6,24 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    messages: [Message!]!
-    friends: [User!]!
-    friendCount: Int!
+    messages: [Message]
+    friends: [User]
+    friendCount: Int
   }
 
   type Message {
     id: ID!
     MessageText: String!
-    createdAt: String!
+    createdAt: String
     username: String!
-    replies: [Reply!]!
+    replies: [Reply]
     replyCount: Int!
   }
 
   type Reply {
     id: ID!
     replyBody: String!
-    createdAt: String!
+    createdAt: String
     username: String!
   }
 
@@ -58,22 +58,23 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    users: [User!]!
+    users: [User]
     user(username: String!): User
-    messages: [Message!]!
+    messages: [Message]
     message(id: ID!): Message
   }
 
 
   type Mutation {
-    login(input: LoginInput!): Auth!
-    signup(input: SignupInput!): Auth!
-    logout: LogoutResponse!
-    createMessage(input: MessageInput!): Message!
+    login(input: LoginInput!): Auth
+    signup(input: SignupInput!): Auth
+    logout: LogoutResponse
+    createMessage(input: MessageInput!): Message
     deleteMessage(id: ID!): Message
-    createReply(messageId: ID!, input: ReplyInput!): Reply!
+    createReply(messageId: ID!, input: ReplyInput!): Reply
     deleteReply(messageId: ID!, replyId: ID!): Message
-    addFriend(friendId: ID!): User!
+    addFriend(friendId: ID!): User
+    removeFriend(friendId: ID!): User
   }
 `;
 
