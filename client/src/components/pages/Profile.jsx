@@ -4,8 +4,11 @@ import '../../assets/profile.css';
 
 export default function Profile() {
   const [profilePicture, setProfilePic] = useState(null);
-  const fileInputRef = useRef(null); 
+  const fileInputRef = useRef(null);
+  // const [isFollowing, setIsFollowing] = useState(false);
+  const [bio, setBio] = useState('');
 
+  // function that trigger the input file whenever
   function handleFileUpload(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -25,7 +28,33 @@ export default function Profile() {
     if (savedProfilePicture) {
       setProfilePic(savedProfilePicture);
     }
+
+    const savedBio = localStorage.getItem('bio');
+    if (savedBio) {
+      setBio(savedBio);
+    }
+  console.log()
+
   }, []);
+
+  // // follow button function
+  // function handleFollowClick() {
+  //   setIsFollowing(!isFollowing);
+  // }
+
+ 
+  
+
+  function handleBioChange(event) {
+    const value = event.target.value;
+    setBio(value)
+  }
+
+  function handleSaveBio() {
+    localStorage.setItem('bio', bio);
+  }
+  
+
 
   return (
     <section className="h-100 gradient-custom-2">
@@ -35,43 +64,49 @@ export default function Profile() {
             <div className="card">
               <div className="rounded-top text-white d-flex flex-row firstRow">
                 <div className="ms-4 mt-6 d-flex flex-column secondRow">
-                  <img 
+                  <img
                     src={profilePicture}
                     alt="Profile"
                     className="mt-4 firstImg"
                     style={{ width: '170px', height: '170px' }} />
-                    <div className="uploadBtn">
+                  <div className="uploadBtn">
                     <input ref={fileInputRef} className="uploadPhoto" type="file" onChange={handleFileUpload} />
-                  <button onClick={handleClick}>Change Picture</button>
+                    <button onClick={handleClick}>Change Picture</button>
+                  </div>
+                  <div>
                   </div>
                 </div>
                 <div className="ms-3 thirdRow">
                   <h5>John Perez</h5>
                 </div>
               </div>
-              <div className="p-4 text-black fourthRow">
-                <div className="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p className="mb-1 h5">253</p>
-                    <p className="small text-muted mb-0">Photos</p>
-                  </div>
-                  <div className="px-3">
-                    <p className="mb-1 h5">1026</p>
-                    <p className="small text-muted mb-0">Followers</p>
-                  </div>
-                  <div>
-                    <p className="mb-1 h5">478</p>
-                    <p className="small text-muted mb-0">Following</p>
+              <div className="d-flex justify-content-center">
+                <div className="p-4 text-black fourthRow">
+                  <div className="d-flex justify-content-end text-center py-1">
+                    <div>
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Photos</p>
+                    </div>
+                    <div className="px-3">
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Followers</p>
+                    </div>
+                    <div>
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Following</p>
+                    </div>
+                    <button 
+                      // onClick={handleFollowClick}
+                      className="followBtn">Follow</button>
                   </div>
                 </div>
               </div>
               <div className="card-body p-4 text-black">
                 <div className="mb-5">
-                  <p className="lead fw-normal mb-1">About</p>
+                  <p className="lead fw-normal mb-1">Bio</p>
                   <div className="p-4 fifthRow">
-                    <p className="font-italic mb-1">Web Developer</p>
-                    <p className="font-italic mb-1">Lives in New York</p>
-                    <p className="font-italic mb-0">Photographer</p>
+                    <input type="text" className="form-control mb-2" value={bio} onChange={handleBioChange} placeholder="Write something about yourself" />
+                    <button className="btn btn-primary" onClick={handleSaveBio}>Save Bio</button>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-4">
@@ -101,22 +136,21 @@ export default function Profile() {
 
 
 
-      
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
 
-        </section>
+    </section>
 
-    )
+  )
 
-    }
+}
 
-    
- 
 
-  
- 
+
+
+
