@@ -10,14 +10,11 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.3.3",
     "bootstrap": "^5.2.3",
-<<<<<<< HEAD
     "buffer": "^6.0.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jwt-decode": "^3.1.2",
-=======
     "jquery": "^3.6.4",
->>>>>>> 5eed57a599d14516e8d025a8d918490e37bc49c8
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
