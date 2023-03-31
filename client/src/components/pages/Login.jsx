@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../assets/login.css'
 import logo from '../../assets/images/sn.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+
+import authService from '../../utils/auth'
+
 
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+ 
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await authService.login(email, password);
+      if (response && response.token) {
+        navigate('/your-desired-route'); // Replace '/your-desired-route' with the actual route you want to navigate to
+      } else {
+        alert('Login failed. Please check your email and password.');
+      }
+    } catch (error) {
+      alert('An error occurred during login. Please try again.');
+    }
+  };
   return (
 
     <div className='loginBody'>
@@ -20,17 +42,17 @@ export default function Login() {
 
 
               <main className='main'>
-                <form className='theform'>
+                <form className='theform' onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
                     <input type="email" id="form3Example3" className="form-control form-control-lg"
-                      placeholder="Enter a valid email address" />
+                      placeholder="Enter a valid email address"  value={email}  onChange={(e) => setEmail(e.target.value)} />
                     <label className="form-label" htmlFor="form3Example3"></label>
                   </div>
 
 
                   <div className="form-outline mb-3">
                     <input type="password" id="form3Example4" className="form-control form-control-lg"
-                      placeholder="Enter password" />
+                      placeholder="Enter password"   value={password}  onChange={(e) => setPassword(e.target.value)}/>
                     <label className="form-label" htmlFor="form3Example4"></label>
                   </div>
 
@@ -46,7 +68,7 @@ export default function Login() {
                   </div>
 
                   <div className="text-center text-lg-start mt-4 pt-2">
-                    <button type="button" className="btn btn-primary btn-lg btnlog"
+                    <button type="submit" className="btn btn-primary btn-lg btnlog"
                     >Login</button>
                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?  
                     <Link to='/Signup' className="link-danger"> Register</Link></p>

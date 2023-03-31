@@ -2,6 +2,12 @@
 
 const { User, Message } = require('../models'); 
 
+//adding bcrypt for user authentication
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { SECRET_KEY } = process.env; // Make sure to define SECRET_KEY in your environment variables.
+
+
 
 
 module.exports = {
@@ -38,11 +44,17 @@ module.exports = {
     },
 
     // create a User
-    createUser(req, res) {
-        User.create(req.body)
-            .then((user) => res.json(user))
-            .catch((err) => res.status(500).json(err));
-    },
+// create a User - added bcrypt to hash the password
+async createUser(req, res) {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const user = await User.create({ ...req.body, password: hashedPassword });
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  
 
     // update a User
     updateUser(req, res) {
@@ -62,6 +74,25 @@ module.exports = {
                 res.status(500).json(err);
             })
     },
+    // Authenticate a user (login)
+async loginUser(req, res) {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (!user) {
+        return res.status(401).json({ message: 'Invalid email or password.' });
+      }
+  
+      const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Invalid email or password.' });
+      }
+  
+      const token = jwt.sign({ _id: user._id }, SECRET_KEY, { expiresIn: '1h' });
+      res.json({ token });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 
     // delete a User
     deleteUser(req, res) {

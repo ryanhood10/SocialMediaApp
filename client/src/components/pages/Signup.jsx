@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
 import '../../assets/signup.css'
 import logo2 from '../../assets/images/sn.png'
+// import {useHistory} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
+import AuthService from '../../utils/auth.js';
+
 
 const Signup = () => {
-
   const [fullName, setFullName] = useState('');
-  // const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const authService = new AuthService();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Signup form submitted:', { fullName, email, password });
-    // Here you can submit the form data to your backend or do other actions
+    try {
+      const response = await authService.signup({ fullName, email, password });
+      if (response && response.token) {
+        navigate('/'); // Navigate to the home page
+      } else {
+        alert('Signup failed. Please check your information and try again.');
+      }
+    } catch (error) {
+      alert('An error occurred during signup. Please try again.');
+    }
   };
+
 
   return (
     <section className="vh-100" >

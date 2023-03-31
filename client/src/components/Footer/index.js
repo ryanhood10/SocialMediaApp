@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+//import AuthService from '../utils/auth'; (-RH we will pull in the Authentication for the user)
+
 const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
