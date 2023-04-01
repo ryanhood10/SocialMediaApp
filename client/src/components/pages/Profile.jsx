@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 export default function Profile() {
   const [profilePicture, setProfilePic] = useState(null);
   const fileInputRef = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const bioInputRef = useRef(null);
 
   // const [isFollowing, setIsFollowing] = useState(false);
   const [bio, setBio] = useState('');
@@ -42,22 +44,21 @@ export default function Profile() {
 
   }, []);
 
-  // // follow button function
-  // function handleFollowClick() {
-  //   setIsFollowing(!isFollowing);
-  // }
-
  
-  
-
   function handleBioChange(event) {
-    const value = event.target.value;
-    setBio(value)
+    setBio(event.target.value);
   }
 
   function handleSaveBio() {
-    localStorage.setItem('bio', bio);
+    localStorage.setItem("bio", bio);
+    setIsEditing(false);
   }
+
+  function handleEditBio() {
+    setIsEditing(true);
+  }
+
+  
   
 
 
@@ -133,12 +134,27 @@ export default function Profile() {
               </div>
               <div className="card-body p-4 text-black">
                 <div className="mb-5">
-                  <p className="lead fw-normal mb-1">Bio</p>
+                  <p className="lead fw-normal mb-1">About</p>
                   <div className="p-4 fifthRow">
-                    <input type="text" className="form-control mb-2" value={bio} onChange={handleBioChange} placeholder="Write something about yourself" />
-                    <button className="btn btn-primary" onClick={handleSaveBio}>Save Bio</button>
-                    
-                    </div>
+                    {isEditing ? (
+        <div>
+          <input
+            type="text"
+            ref={bioInputRef}
+            value={bio}
+            onChange={handleBioChange}
+            placeholder="Write something about yourself"
+          />
+          <button className="bioButton" onClick={handleSaveBio}>Save</button>
+        </div>
+      ) : (
+        <div>
+          <p>{bio}</p>
+          <button className="bioButton" onClick={handleEditBio}>Edit Bio</button>
+        </div>
+      )}
+    
+                  </div>
                 </div>
     
       
