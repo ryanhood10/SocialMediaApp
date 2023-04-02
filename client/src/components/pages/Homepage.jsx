@@ -5,7 +5,7 @@ import { CgProfile } from 'react-icons/cg';
 import { FiPlus, FiSend, FiX } from 'react-icons/fi';
 import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
-import FriendList from './FriendList';
+// import FriendList from './FriendList';
 
 
 export default function Homepage() {
