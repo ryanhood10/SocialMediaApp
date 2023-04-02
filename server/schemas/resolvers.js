@@ -64,7 +64,6 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
       }
-  
       const token = signToken(user);
       return { token, user };
     },

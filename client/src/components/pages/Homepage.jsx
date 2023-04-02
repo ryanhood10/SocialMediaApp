@@ -5,10 +5,16 @@ import { CgProfile } from 'react-icons/cg';
 import { FiPlus, FiSend, FiX } from 'react-icons/fi';
 import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
+import { useQuery } from "@apollo/client";
+import { USER } from '../../utils/queries';
 // import FriendList from './FriendList';
 
 
 export default function Homepage() {
+  //queries
+  const { loading, data } = useQuery(USER)
+  const friends = data?.friends || [];
+  console.log(friends)
 
 
   const [showPostCard, setShowPostCard] = useState(false);
@@ -37,7 +43,7 @@ export default function Homepage() {
   }
 
   return (
-    <body class="gradientBackground">
+    <body className="gradientBackground">
       <>
         <header className='header'>
           <div className='logo'>
@@ -95,7 +101,19 @@ export default function Homepage() {
             </li>
           </ul>
         </nav>
+        {/* friends list to be edited */}
+
         <div className='friendsList'>
+          <h2>Friends</h2>
+          {friends.slice(0, 3).map((friend) => (
+            <div className='friend' key={friend.id}>
+              <img src={friend.avatar} alt='Friend' />
+              <span>{friend.name}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* <div className='friendsList'>
           <h2>Friends</h2>
           <div className='friend'>
             <img src='' alt='Friend' />
@@ -109,7 +127,9 @@ export default function Homepage() {
             <img src='' alt='Friend' />
             <span>Friend 3</span>
           </div>
-        </div>
+        </div> */}
+
+        {/* ========================= */}
         <div className='chatbox'>
         </div>
 

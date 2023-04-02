@@ -15,7 +15,7 @@ export default function LoginFunction() {
 
   // implementing login mutation
   const [login] = useMutation(LOGIN);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
 
   const [validationErrors, setValidationErrors] = useState({
@@ -25,13 +25,13 @@ export default function LoginFunction() {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
   };
 
   // this is what is happening on a click
-  const handleOnClick = async () => {
+  const handleOnClick = async (event) => {
+    // event.preventDefault()
     if (email.length < 1) {
       setValidationErrors({
         ...validationErrors,
@@ -57,16 +57,16 @@ export default function LoginFunction() {
     }
 
     //Ryans Authentication token service
-    try {
-      const response = await authService.login(email, password);
-      if (response && response.token) {
-        navigate('/Homepage'); // Replace '/' with the actual route you want to navigate to
-      } else {
-        alert('Login failed. Please check your email and password.');
-      }
-    } catch (error) {
-      alert('An error occurred during login. Please try again.');
-    }
+    // try {
+    //   const response = await authService.login(email, password);
+    //   if (response && response.token) {
+    //     navigate('/Homepage'); // Replace '/' with the actual route you want to navigate to
+    //   } else {
+    //     alert('Login failed. Please check your email and password.');
+    //   }
+    // } catch (error) {
+    //   alert('An error occurred during login. Please try again.');
+    // }
 
     try {
       const data = await login({
