@@ -24,12 +24,15 @@ const SignupForm = () => {
     //try catch for user token authentication servuce
     try {
       const response = await authService.signup({ username, email, password });
+
       if (response && response.token) {
         navigate('/'); // Navigate to the home page
       } else {
         alert('Signup failed. Please check your information and try again.');
       }
+      // catch is catching for a wierd reason.
     } catch (error) {
+      console.log(error)
       alert('An error occurred during signup. Please try again.');
     }
     // try catch used for the mutation
