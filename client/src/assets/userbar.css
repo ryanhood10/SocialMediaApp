@@ -1,0 +1,32 @@
+.userBar {
+    margin-top: 20px;
+  }
+  
+  .userList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .userList li {
+    margin-right: 10px;
+  }
+  
+  .userList li:last-child {
+    margin-right: 0;
+  }
+  
+  .userList li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .userList li a:hover {
+    text-decoration: underline;
+  }
+  

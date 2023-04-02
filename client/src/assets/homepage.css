@@ -1,4 +1,6 @@
-
+body {
+  background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+}
 
 
 .homepageBody {
@@ -26,12 +28,11 @@
     margin: 0;
     padding: 0;
     width: 50px;
-    margin: 10px;
   }
   
   .sideNav li {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
     color: grey;
     list-style: none;
     margin-top: 50px;
@@ -47,10 +48,6 @@
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  .sideNav a:hover {
-    background-color: #ddd;
   }
   
   .header {
@@ -77,6 +74,7 @@
     border-radius: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
+    box-shadow: white 0 0 5px;
 }
 
 .searchButton {
@@ -103,12 +101,12 @@
   align-items: center;
 }
 
-.card {
+.chatCard {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   width: 500px;
-  box-shadow: green 0 0 5px;
+  box-shadow: white 0 0 5px;
 }
 
 .postButtonWrapper {
@@ -138,17 +136,19 @@
 }
 
 .newPostButton {
-  border-radius: 50%;
-  background-color: white;
-  border: white;
   margin-left: 10px;
   margin-bottom: 15px;
+  border: none;
+  background: none;
 }
 
-.postIcon:hover,
-.paperclipIcon:hover {
+ .searchButton:hover,
+.newPostButton:hover,
+.homeIcon:hover,
+.profileIcon:hover,
+.logoutIcon:hover {
   transform: scale(1.1);
-  color: blue;
+  color: whitesmoke;
 }
 
 .cardWrapper {
@@ -164,7 +164,7 @@
   z-index: 1;
 }
 
-.card {
+.chatCard {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -180,13 +180,10 @@
     margin-left: 775px;
     border: solid;
     border-radius: 10px;
-    box-shadow: green 0 0 5px;
+    box-shadow: whitesmoke 0 0 5px;
     background: #e7e5e5
 }
 
-body {
-  background-color: rgb(194, 207, 194);
-}
 .post p {
   margin: 10px;
   margin-bottom: 1rem;
@@ -196,4 +193,94 @@ body {
 .fileInput {
   cursor: pointer;
   width: 10px;
+}
+
+.cancelButton {
+  width: 10px;
+  border: none;
+  background-color: white;
+  float: left;
+}
+
+/* .homeIcon,
+.profileIcon,
+.logoutIcon {
+  background: none;
+} */
+
+.logo {
+  position: absolute;
+ font-size: larger;
+  top: 7px;
+  left: 30px;
+ font-family: fantasy;
+  text-shadow: white 0 0 5px;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+
+.navButton:hover,
+.navButton1:hover {
+color: whitesmoke;
+}
+
+.navButton,
+.navButton1 {
+  background: none;
+  border: none;
+  font-weight: 300;
+  font-family: fantasy;
+}
+
+/* .navButton1 {
+  margin-left: 25px;
+} */
+.navText1 {
+  width: 80px;
+}
+
+.postIcon:hover,
+ .paperclipIcon:hover {
+  transform: scale(1.1);
+  color: blue;
+ }
+
+ .friendsList {
+  position: fixed;
+  top: 100px;
+  left: 200px;
+  width: 200px;
+  height: fit-content;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.friendsList h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.friend img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.friend span {
+  font-size: 18px;
 }
