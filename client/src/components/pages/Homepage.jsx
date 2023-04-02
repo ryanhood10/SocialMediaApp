@@ -8,6 +8,15 @@ import '../../assets/homepage.css';
 import { useQuery } from "@apollo/client";
 import { USER } from '../../utils/queries';
 // import FriendList from './FriendList';
+import {
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBIcon,
+  MDBTypography,
+  MDBInputGroup,
+  MDBCardHeader
+} from "mdb-react-ui-kit";
 
 
 export default function Homepage() {
@@ -47,7 +56,6 @@ export default function Homepage() {
       <>
         <header className='header'>
           <div className='logo'>
-            {/* <img src={logo} alt='Logo' /> */}
             <p className='Logo'>
               Word On The Street
             </p>
@@ -81,14 +89,14 @@ export default function Homepage() {
                 </button>
               </Link>
             </li>
-            <li title='New Post' data-title-delay='10'>
+            {/* <li title='New Post' data-title-delay='10'>
               <button className='navButton1' onClick={handlePostButtonClick}>
                 <FiPlus className='navIcon' />
                 <p className='navText1'>
                   New Post
                 </p>
               </button>
-            </li>
+            </li> */}
             <li title='Logout' data-title-delay='10'>
               <Link to='/'>
                 <button className='navButton'>
@@ -116,24 +124,82 @@ export default function Homepage() {
         {/* <div className='friendsList'>
           <h2>Friends</h2>
           <div className='friend'>
-            <img src='' alt='Friend' />
+            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
             <span>Friend 1</span>
           </div>
           <div className='friend'>
-            <img src='' alt='Friend' />
+            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
             <span>Friend 2</span>
           </div>
           <div className='friend'>
-            <img src='' alt='Friend' />
+            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
             <span>Friend 3</span>
           </div>
         </div> */}
 
         {/* ========================= */}
         <div className='chatbox'>
+          <MDBCol md="6" lg="7" xl="8">
+            <MDBTypography listUnStyled>
+              <li className="d-flex justify-content-between mb-4">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                  alt="avatar"
+                  className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                  width="60"
+                />
+                
+                <MDBCard>
+                  <>
+                  <MDBCardHeader className="d-flex justify-content-between p-3 UserName">
+                    <p className="fw-bold mb-0">Brad Pitt</p>
+                    <p className="text-muted small mb-0">
+                      <MDBIcon far icon="clock" /> 12 mins ago
+                    </p>
+                  </MDBCardHeader>
+                </>
+                  <MDBCardBody>
+                    <form className='postList'>
+                      {posts.map((post, index) => (
+                        <section className='post' key={index}>
+                          <p>{post.content}</p>
+                          <p>{post.date}</p>
+                        </section>
+                      ))}
+                    </form>
+                  </MDBCardBody>
+                </MDBCard>
+              </li>
+              <div id='bottom'>
+            <div className='chatCard'>
+              <form onSubmit={handlePostSubmit}>
+                <textarea
+                  placeholder='Write something...'
+                  className='postInput'
+                  name='postInput'
+                ></textarea>
+                <div className='postbuttons'>
+                <button type='submit' className='postButton'>
+                    <FiSend className='postIcon' />
+                  </button>
+                  <label htmlFor='fileInput' className='fileInput'>
+                    <FaPaperclip className='paperclipIcon' />
+                    <input
+                      type='file'
+                      id='fileInput'
+                      accept='image/*'
+                      style={{ display: 'none' }}
+                    />
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+             
+            </MDBTypography>
+          </MDBCol>
         </div>
-
-        {showPostCard && (
+        {/* {showPostCard && (
           <div className='cardWrapper'>
             <div className='chatCard'>
               <button className='cancelButton' onClick={handlePostCancel}>
@@ -164,16 +230,9 @@ export default function Homepage() {
               </form>
             </div>
           </div>
-        )}
+        )} */}
         <>
-          <form className='postList'>
-            {posts.map((post, index) => (
-              <section className='post' key={index}>
-                <p>{post.content}</p>
-                <p>{post.date}</p>
-              </section>
-            ))}
-          </form>
+         
         </>
       </>
     </body>
