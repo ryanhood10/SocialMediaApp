@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../../assets/login.css'
-import logo from '../../assets/images/Login.png'
+import logo from '../../assets/images/NewLogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
@@ -84,9 +84,8 @@ export default function LoginFunction() {
   }
 
   return (
-
     <div className='loginBody'>
-
+      <header className='loginHeader'>Word On The Street</header>
       <section className="vh-100">
         <div className="container-fluid h-custom">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -100,6 +99,8 @@ export default function LoginFunction() {
               <main className='main'>
                 <form className='theform' onSubmit={handleOnClick}>
                   <div className="form-outline mb-4">
+                    <a>Welcome please login or register
+                      to get started!!</a>
 
 
 
@@ -148,19 +149,18 @@ export default function LoginFunction() {
           </div>
         </div>
 
-        <footer>
+        {/* <footer>
           <ul>
             <li>Welcome to WordOnTheStreet</li>
           </ul>
 
 
-        </footer>
+        </footer> */}
       </section>
 
 
 
     </div>
-
   )
 }
 

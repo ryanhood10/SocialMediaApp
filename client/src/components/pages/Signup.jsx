@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../assets/signup.css'
-import logo2 from '../../assets/images/sn.png'
+import logo2 from '../../assets/images/NewLogo.png'
 
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'

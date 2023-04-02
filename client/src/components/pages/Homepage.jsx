@@ -5,7 +5,7 @@ import { CgProfile } from 'react-icons/cg';
 import { FiPlus, FiSend, FiX } from 'react-icons/fi';
 import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
-import FriendList from './FriendList';
+// import FriendList from './FriendList';
 
 
 export default function Homepage() {
@@ -26,7 +26,7 @@ export default function Homepage() {
       date: new Date().toLocaleString(),
       user: {
         name: 'John Doe',
-        pictureUrl: 'https://example.com/profile-picture.png',
+        pictureUrl: '',
       },
     };
     setPosts([post, ...posts]);
@@ -98,15 +98,15 @@ export default function Homepage() {
         <div className='friendsList'>
           <h2>Friends</h2>
           <div className='friend'>
-            <img src='https://example.com/profile-picture1.png' alt='Friend' />
+            <img src='' alt='Friend' />
             <span>Friend 1</span>
           </div>
           <div className='friend'>
-            <img src='https://example.com/profile-picture2.png' alt='Friend' />
+            <img src='' alt='Friend' />
             <span>Friend 2</span>
           </div>
           <div className='friend'>
-            <img src='https://example.com/profile-picture3.png' alt='Friend' />
+            <img src='' alt='Friend' />
             <span>Friend 3</span>
           </div>
         </div>

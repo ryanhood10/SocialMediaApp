@@ -106,7 +106,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   width: 500px;
-  box-shadow: white 0 0 5px;
+  box-shadow: rgb(255, 255, 255) 0 0 5px;
 }
 
 .postButtonWrapper {
@@ -178,9 +178,9 @@ body {
     margin-top: 75px;
     width: 300px;
     margin-left: 775px;
-    border: solid;
+    /* border: solid; */
     border-radius: 10px;
-    box-shadow: whitesmoke 0 0 5px;
+    box-shadow: rgb(184, 133, 231) 0 0 5px;
     background: #e7e5e5
 }
 

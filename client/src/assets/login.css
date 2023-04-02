@@ -1,24 +1,27 @@
-
-
 .loginBody {
     background-color: rgba(114, 110, 110, 0.08);
 }
 
 .logoimg {
     width: 100%;
-    margin-top: 2%;
+    margin-top: 15%;
+    /* border-radius: 10px; */
+    align-items: center;
+    /* box-shadow: whitesmoke 0 0 5px; */
+    padding-bottom: 60px;
 }
 
 .theform {
-    border: solid 8px  #156d33;
+    border: solid 8px rgb(133, 83, 153);
     border-radius: 10%;
     border-style: inset;
-    background-color: rgba(0, 0, 0, 0.181);
+    background-color: rgba(194, 161, 161, 0.181);
     padding: 10%;
     position: inherit;
     margin-top: 8%;
     width: 450px;
     margin-left: 50px;
+    box-shadow: whitesmoke 0 0 5px;
 }
 
 .btnlog {
@@ -26,22 +29,28 @@
     font-size: 17px;
 }
 
-footer {
-    position: fixed;
+.loginHeader {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(#156d33, #ffffff);
-    text-align: center;
+    background-color: rgba(41, 32, 68, 0.336);
+    text-align: left;
     padding: 35px;
-    font-weight: 700;
+    font-weight: larger;
     text-decoration: none;
-    font-size: 35px;
-    font-family: monospace;
+    font-size: 30px;
+    font-family: fantasy;
+    font-weight: 200;
+    text-shadow: white 0 0 5px;
+}
 
-  }
-
-  footer li {
+header li,
+footer li {
     list-style: none;
-  }
-  
+}
+
+.theform a {
+    font-size: large;
+    font-weight: 600;
+    
+}
