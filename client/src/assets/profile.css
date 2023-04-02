@@ -49,7 +49,7 @@
 } */
 
 .fifthRow {
-    background-color: rgba(44, 44, 137, 0.193);
+    background-color: rgba(45, 77, 136, 0.641);
     border-radius: 3%;
 }
 
@@ -94,12 +94,16 @@
     background-color: orange;
 }
 
-.homeIconGradient-custom-2 {
-    background: #fbc2eb;
+.bioButton {
+    
+    margin-left: 84%;
+    border: 1px solid;
+    border-radius: 6%;
+    background-color: #fbc2eb;
+    width: fit-content;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+.bioButton:hover {
+    background-color: orange;
 }
