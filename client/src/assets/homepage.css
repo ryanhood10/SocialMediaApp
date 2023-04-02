@@ -55,8 +55,9 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    position: relative;  /* make the header a positioned element */
+  /* make the header a positioned element */
     margin-top: 10px;
+    position: sticky;
 }
 
 .searchForm {
@@ -84,12 +85,12 @@ body {
     margin-left: 0.5rem;
 }
 
-.postButtonWrapper {
+/* .postButtonWrapper {
   position: fixed;
   bottom: 20px;
   left: 20px;
-}
-.cardWrapper {
+} */
+/* .cardWrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -99,33 +100,35 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .chatCard {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  width: 500px;
+  /* border-radius: 10px; */
+  /* width: 500px; */
   box-shadow: rgb(255, 255, 255) 0 0 5px;
+  display: flex !important;
+  flex-direction: row;
 }
 
-.postButtonWrapper {
+/* .postButtonWrapper {
   position: relative;
   z-index: 1;
-}
+} */
 
-.cardWrapper form {
+ /* .cardWrapper form {
   margin: 20px;
-  /* display: flex;
-  flex-direction: row; */
-}
+  display: flex;
+  flex-direction: row;
+} */
 
-.cardWrapper form textarea {
+/* .cardWrapper form textarea {
   width: 300px;
   height: inherit;
-}
+} */
 
-.cardWrapper form button {
+/* .cardWrapper form button {
   padding: 10px;
   margin-left: 10px;
   border-radius: 100%;
@@ -133,7 +136,7 @@ body {
   background-color: white;
   border: white;
   padding-left: 25px;
-}
+} */
 
 .newPostButton {
   margin-left: 10px;
@@ -151,7 +154,7 @@ body {
   color: whitesmoke;
 }
 
-.cardWrapper {
+/* .cardWrapper {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -162,25 +165,27 @@ body {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
-}
+} */
 
-.chatCard {
+/* .chatCard {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
   width: 80%;
-  max-width: 600px
-}
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+} */
 
 .post {
   border-color: #333;
     outline: #333;
     margin-top: 75px;
     width: 300px;
-    margin-left: 775px;
+    /* margin-left: 775px; */
     /* border: solid; */
-    border-radius: 10px;
-    box-shadow: rgb(184, 133, 231) 0 0 5px;
+    border-radius: 8px;
+    box-shadow: rgb(174, 121, 224) 0 0 10px;
     background: #e7e5e5
 }
 
@@ -195,12 +200,12 @@ body {
   width: 10px;
 }
 
-.cancelButton {
+/* .cancelButton {
   width: 10px;
   border: none;
   background-color: white;
   float: left;
-}
+} */
 
 /* .homeIcon,
 .profileIcon,
@@ -251,9 +256,9 @@ color: whitesmoke;
 
  .friendsList {
   position: fixed;
-  top: 100px;
-  left: 200px;
-  width: 200px;
+  top: 140px;
+  left: 300px;
+  width: 250px;
   height: fit-content;
   background-color: #fff;
   border-radius: 10px;
@@ -271,7 +276,7 @@ color: whitesmoke;
 .friend {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .friend img {
@@ -282,5 +287,64 @@ color: whitesmoke;
 }
 
 .friend span {
-  font-size: 18px;
+  font-size: 15px;
+}
+
+.chatbox {
+  margin-left: 700px;
+  padding: 45px;
+  margin-top: 100px;
+  margin-bottom: 300px;
+  background-color: white;
+  border-radius: 10px;
+  width: 800px;
+  height: 750px;
+  box-shadow: whitesmoke 0 0 5px;
+}
+
+#bottom {
+  position: absolute;
+  bottom: 50px;
+  left: 875px;
+  display: flex;
+  flex-direction: row;
+}
+
+#messagebox {
+  border: solid  1px;
+  margin-right: 20px;
+}
+
+.postButton {
+  margin-left: 30px;
+  margin-top: 0px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.paperclipIcon {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+form .postbuttons{
+  display: flex;
+  float: right;
+}
+
+form textarea {
+  height: 35px;
+  width: 400px;
+}
+
+.postList {
+margin-right: 75px;
+}
+
+.UserName p {
+  position: relative;
+}
+
+MDBCardHeader {
+  position: fixed;
 }
