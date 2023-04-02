@@ -3,6 +3,7 @@ import logo from '../../assets/images/Login.png';
 import '../../assets/profile.css';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
+import { BiLogOutCircle } from 'react-icons/bi'
 import { Link } from 'react-router-dom';
 
 export default function Profile() {
@@ -63,7 +64,7 @@ export default function Profile() {
 
   return (
 <>
-<header className='header'>
+<header className='headerProfile'>
         <form className='searchForm'>
           <input type='text' placeholder='Search' className='searchInput' />
           <button type='submit' className='searchButton'>
@@ -73,14 +74,34 @@ export default function Profile() {
 
         <nav className='sideNav'>
           <ul>
-            <li>
+          <li title='Home' data-title-delay='10'>
               <Link to='/Homepage'>
-                <FaHome className='homeIcon' />
+                <button className='navButton'>
+                  <FaHome className='navIcon' />
+                  <p className='navText'>
+                    Home
+                  </p>
+                </button>
               </Link>
             </li>
-            <li>
+            <li title='Profile' data-title-delay='10'>
               <Link to='/Profile'>
-                <CgProfile className='profileIcon' />
+                <button className='navButton'>
+                  <CgProfile className='navIcon' />
+                  <p className='navText'>
+                    Profile
+                  </p>
+                </button>
+              </Link>
+            </li>
+            <li title='Logout' data-title-delay='10'>
+              <Link to='/'>
+                <button className='navButton'>
+                  <BiLogOutCircle className='navIcon' />
+                  <p className='navText'>
+                    Logout
+                  </p>
+                </button>
               </Link>
             </li>
           </ul>
