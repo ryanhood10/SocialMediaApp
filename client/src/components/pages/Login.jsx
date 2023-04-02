@@ -99,10 +99,10 @@ export default function LoginFunction() {
               <main className='main'>
                 <form className='theform' onSubmit={handleOnClick}>
                   <div className="form-outline mb-4">
-                    <a>Welcome please login or register
-                      to get started!!</a>
 
+                    <h1>Welcome</h1>
 
+                    <h6>please login or register to get started</h6>
 
                     <input
                       value={email}
