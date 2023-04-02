@@ -38,7 +38,6 @@ function App() {
                 <Route path='/Homepage' element={<Homepage />} />
                 <Route path='/Profile' element={<Profile />} />
 
-                 <Route path='/Search' element={<Search />} />
               </Routes>
             
           </HashRouter>
