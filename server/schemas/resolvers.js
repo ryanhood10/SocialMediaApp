@@ -34,9 +34,14 @@ const resolvers = {
     },
   
     // get all messages
-    messages: async (parent, { username }) => {
+    messages: async (parent, { username, offset = 0, limit = 10 }) => {
       const params = username ? { username } : {};
-      return Message.find(params).sort({ createdAt: -1 });
+      const messages = await Message.find(params)
+        .sort({ createdAt: -1 })
+        .skip(offset)
+        .limit(limit);
+    
+      return messages;
     },
   
     // get a message by id

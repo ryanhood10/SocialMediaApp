@@ -13,6 +13,5 @@ export const USER_PROFILE = gql`
 query Me {
   me {
     username
-    friendCount
   }
 }`;

@@ -18,5 +18,6 @@ mutation Login($input: LoginInput!) {
         email
         password
       }
+      token
     }
 }`;

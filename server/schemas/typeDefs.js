@@ -2,8 +2,8 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    id: ID!
-    username: String!
+    _id: ID
+    username: String
     email: String!
     password: String!
     messages: [Message]
@@ -12,7 +12,7 @@ const typeDefs = gql`
   }
 
   type Message {
-    id: ID!
+    _id: ID
     MessageText: String!
     createdAt: String
     username: String!
@@ -21,15 +21,15 @@ const typeDefs = gql`
   }
 
   type Reply {
-    id: ID!
+    _id: ID!
     replyBody: String!
     createdAt: String
     username: String!
   }
 
   type Auth {
-    token: ID!
-    user: User!
+    token: ID
+    user: User
   }
 
   input SignupInput {

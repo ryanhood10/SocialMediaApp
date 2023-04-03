@@ -15,15 +15,14 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const bioInputRef = useRef(null);
 
-
   // profile query
-  const { loading, data, error } = useQuery(USER_PROFILE);
-
-  let username = [];
-  if (data && data.username) {
-    username = data.username;
-  }
-
+  console.log("This the USER_PROFILE")
+  console.log(USER_PROFILE)
+  const { loading, data } = useQuery(USER_PROFILE)
+  console.log("This is the data needed on the profile page")
+  console.log(data)
+  const username = data?.username;
+  console.log(username)
   // fetching username from the server
 
 
@@ -56,11 +55,11 @@ export default function Profile() {
     if (savedBio) {
       setBio(savedBio);
     }
-    console.log()
+  console.log()
 
   }, []);
 
-
+ 
   function handleBioChange(event) {
     setBio(event.target.value);
   }
@@ -74,13 +73,13 @@ export default function Profile() {
     setIsEditing(true);
   }
 
-
-
+  
+  
 
 
   return (
-    <>
-      <header className='headerProfile'>
+<>
+<header className='headerProfile'>
         <form className='searchForm'>
           <input type='text' placeholder='Search' className='searchInput' />
           <button type='submit' className='searchButton'>
@@ -90,7 +89,7 @@ export default function Profile() {
 
         <nav className='sideNav'>
           <ul>
-            <li title='Home' data-title-delay='10'>
+          <li title='Home' data-title-delay='10'>
               <Link to='/Homepage'>
                 <button className='navButton'>
                   <FaHome className='navIcon' />
@@ -123,82 +122,82 @@ export default function Profile() {
           </ul>
         </nav>
       </header>
+      
+    <section className="h-100 gradient-custom-2">
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-lg-9 col-xl-7">
+            <div className="card">
+              <div className="rounded-top text-white d-flex flex-row firstRow">
+                <div className="ms-4 mt-6 d-flex flex-column secondRow">
+                  <img
+                    src={profilePicture}
+                    alt="Profile"
+                    className="mt-4 firstImg"
+                    style={{ width: '170px', height: '170px' }} />
+                  <div className="uploadBtn">
+                    <input ref={fileInputRef} className="uploadPhoto" type="file" onChange={handleFileUpload} />
+                    <button onClick={handleClick}>Change Picture</button>
+                  </div>
+                  <div>
+                  </div>
+                </div>
+                <div className="ms-3 thirdRow">
+                  {/* This is where the username should go */}
+                  {username ? <h5>{username}</h5> : <h5>Loading...</h5>}
 
-      <section className="h-100 gradient-custom-2">
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-lg-9 col-xl-7">
-              <div className="card">
-                <div className="rounded-top text-white d-flex flex-row firstRow">
-                  <div className="ms-4 mt-6 d-flex flex-column secondRow">
-                    <img
-                      src={profilePicture}
-                      alt="Profile"
-                      className="mt-4 firstImg"
-                      style={{ width: '170px', height: '170px' }} />
-                    <div className="uploadBtn">
-                      <input ref={fileInputRef} className="uploadPhoto" type="file" onChange={handleFileUpload} />
-                      <button onClick={handleClick}>Change Picture</button>
+
+                </div>
+              </div>
+              <div className="d-flex justify-content-center">
+                <div className="p-4 text-black fourthRow">
+                  <div className="d-flex justify-content-end text-center py-1">
+                    <div>
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Photos</p>
+                    </div>
+                    <div className="px-3">
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Followers</p>
                     </div>
                     <div>
+                      <p className="mb-1 h5">0</p>
+                      <p className="small text-muted mb-0">Following</p>
                     </div>
-                  </div>
-                  <div className="ms-3 thirdRow">
-                    {/* This is where the username should go */}
-                    {username ? <h5>{username}</h5> : <h5>Loading...</h5>}
-
-
+                    <button 
+                      // onClick={handleFollowClick}
+                      className="followBtn">addFriend</button>
                   </div>
                 </div>
-                <div className="d-flex justify-content-center">
-                  <div className="p-4 text-black fourthRow">
-                    <div className="d-flex justify-content-end text-center py-1">
-                      <div>
-                        <p className="mb-1 h5">0</p>
-                        <p className="small text-muted mb-0">Photos</p>
-                      </div>
-                      <div className="px-3">
-                        <p className="mb-1 h5">0</p>
-                        <p className="small text-muted mb-0">Followers</p>
-                      </div>
-                      <div>
-                        <p className="mb-1 h5">0</p>
-                        <p className="small text-muted mb-0">Following</p>
-                      </div>
-                      <button
-                        // onClick={handleFollowClick}
-                        className="followBtn">Follow</button>
-                    </div>
+              </div>
+              <div className="card-body p-4 text-black">
+                <div className="mb-5">
+                  <p className="lead fw-normal mb-1">About</p>
+                  <div className="p-4 fifthRow">
+                    {isEditing ? (
+        <div>
+          <input
+            type="text"
+            ref={bioInputRef}
+            value={bio}
+            onChange={handleBioChange}
+            placeholder="Write something about yourself"
+          />
+          <button className="bioButton" onClick={handleSaveBio}>Save</button>
+        </div>
+      ) : (
+        <div>
+          <p>{bio}</p>
+          <button className="bioButton" onClick={handleEditBio}>Edit Bio</button>
+        </div>
+      )}
+    
                   </div>
                 </div>
-                <div className="card-body p-4 text-black">
-                  <div className="mb-5">
-                    <p className="lead fw-normal mb-1">About</p>
-                    <div className="p-4 fifthRow">
-                      {isEditing ? (
-                        <div>
-                          <input
-                            type="text"
-                            ref={bioInputRef}
-                            value={bio}
-                            onChange={handleBioChange}
-                            placeholder="Write something about yourself"
-                          />
-                          <button className="bioButton" onClick={handleSaveBio}>Save</button>
-                        </div>
-                      ) : (
-                        <div>
-                          <p>{bio}</p>
-                          <button className="bioButton" onClick={handleEditBio}>Edit Bio</button>
-                        </div>
-                      )}
+    
+      
 
-                    </div>
-                  </div>
-
-
-
-
+                 
                   <div className="d-flex justify-content-between align-items-center mb-4">
                     <p className="lead fw-normal mb-0">Recent photos</p>
                     <p className="mb-0">
@@ -225,14 +224,14 @@ export default function Profile() {
                   </div>
 
 
-                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
 
-      </section>
+    </section>
 
     </>
   )
