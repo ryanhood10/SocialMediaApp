@@ -10,10 +10,8 @@ const resolvers = {
           .select('-__v -password')
           .populate('thoughts')
           .populate('friends');
-  
         return userData;
       }
-  
       throw new AuthenticationError('Not logged in');
     },
   
@@ -54,7 +52,6 @@ const resolvers = {
     signup: async (parent, args) => {
       const user = await User.create(args.input);
       const token = signToken(user);
-  
       return { token, user };
     },
   

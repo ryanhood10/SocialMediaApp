@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaHome, FaPaperclip } from 'react-icons/fa';
+import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
-import { FiPlus, FiSend, FiX } from 'react-icons/fi';
+import { FiSend } from 'react-icons/fi';
 import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
 import { useQuery } from "@apollo/client";
-import { USER } from '../../utils/queries';
+import { USER, SEARCH } from '../../utils/queries';
 // import FriendList from './FriendList';
 import {
   MDBCol,
   MDBCard,
-  MDBCardBody,
-  MDBIcon,
   MDBTypography,
-  MDBInputGroup,
-  MDBCardHeader
 } from "mdb-react-ui-kit";
 
 
@@ -24,6 +20,11 @@ export default function Homepage() {
   const { loading, data } = useQuery(USER)
   const friends = data?.friends || [];
   console.log(friends)
+
+  // states
+  const [search, setSearch] = useState('')
+  const [message, setMessage] = useState('')
+
 
 
   const [showPostCard, setShowPostCard] = useState(false);
@@ -60,12 +61,21 @@ export default function Homepage() {
               Word On The Street
             </p>
           </div>
+
+          {/* This is the search bar */}
           <form className='searchForm'>
-            <input type='text' placeholder='Search' className='searchInput' />
+            <input 
+              type='text'
+              value= {search}
+              placeholder='Search'
+              className='searchInput'
+            />            
             <button type='submit' className='searchButton'>
               <FaSearch className='searchIcon' />
-            </button>
+            </button>            
           </form>
+
+          {/* This is the homepage button */}
         </header>
         <nav className='sideNav'>
           <ul>
@@ -73,44 +83,32 @@ export default function Homepage() {
               <Link to='/Homepage'>
                 <button className='navButton'>
                   <FaHome className='navIcon' />
-                  <p className='navText'>
-                    Home
-                  </p>
+                  <p className='navText'> Home </p>
                 </button>
               </Link>
             </li>
+            {/* This is the profile button */}
             <li title='Profile' data-title-delay='10'>
               <Link to='/Profile'>
                 <button className='navButton'>
                   <CgProfile className='navIcon' />
-                  <p className='navText'>
-                    Profile
-                  </p>
+                  <p className='navText'> Profile </p>
                 </button>
               </Link>
             </li>
-            {/* <li title='New Post' data-title-delay='10'>
-              <button className='navButton1' onClick={handlePostButtonClick}>
-                <FiPlus className='navIcon' />
-                <p className='navText1'>
-                  New Post
-                </p>
-              </button>
-            </li> */}
+            {/* This is the logout button */}
             <li title='Logout' data-title-delay='10'>
               <Link to='/'>
                 <button className='navButton'>
                   <BiLogOutCircle className='navIcon' />
-                  <p className='navText'>
-                    Logout
-                  </p>
+                  <p className='navText'> Logout </p>
                 </button>
               </Link>
             </li>
           </ul>
         </nav>
-        {/* friends list to be edited */}
 
+        {/* friends list to be edited */}
         <div className='friendsList'>
           <h2>Friends</h2>
           {friends.slice(0, 3).map((friend) => (
@@ -121,120 +119,45 @@ export default function Homepage() {
           ))}
         </div>
 
-        {/* <div className='friendsList'>
-          <h2>Friends</h2>
-          <div className='friend'>
-            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
-            <span>Friend 1</span>
-          </div>
-          <div className='friend'>
-            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
-            <span>Friend 2</span>
-          </div>
-          <div className='friend'>
-            <img src='https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp' alt='Friend' />
-            <span>Friend 3</span>
-          </div>
-        </div> */}
-
-        {/* ========================= */}
+        {/* This is the chatbox */}
         <div className='chatbox'>
           <MDBCol md="6" lg="7" xl="8">
             <MDBTypography listUnStyled>
               <li className="d-flex justify-content-between mb-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                  alt="avatar"
-                  className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                  width="60"
-                />
-                
                 <MDBCard>
-                  <>
-                  <MDBCardHeader className="d-flex justify-content-between p-3 UserName">
-                    <p className="fw-bold mb-0">Brad Pitt</p>
-                    <p className="text-muted small mb-0">
-                      <MDBIcon far icon="clock" /> 12 mins ago
-                    </p>
-                  </MDBCardHeader>
-                </>
-                  <MDBCardBody>
-                    <form className='postList'>
-                      {posts.map((post, index) => (
-                        <section className='post' key={index}>
-                          <p>{post.content}</p>
-                          <p>{post.date}</p>
-                        </section>
-                      ))}
-                    </form>
-                  </MDBCardBody>
+                  <form className='postList'>
+                    {posts.map((post, index) => (
+                      <section className='post' key={index}>
+                        <p>{post.content}</p>
+                        <p>{post.date}</p>
+                      </section>
+                    ))}
+                  </form>
                 </MDBCard>
               </li>
               <div id='bottom'>
-            <div className='chatCard'>
-              <form onSubmit={handlePostSubmit}>
-                <textarea
-                  placeholder='Write something...'
-                  className='postInput'
-                  name='postInput'
-                ></textarea>
-                <div className='postbuttons'>
-                <button type='submit' className='postButton'>
-                    <FiSend className='postIcon' />
-                  </button>
-                  <label htmlFor='fileInput' className='fileInput'>
-                    <FaPaperclip className='paperclipIcon' />
-                    <input
-                      type='file'
-                      id='fileInput'
-                      accept='image/*'
-                      style={{ display: 'none' }}
-                    />
-                  </label>
+                <div className='chatCard'>
+                  <form onSubmit={handlePostSubmit}>
+                    <textarea
+                      placeholder='Write something...'
+                      value= {message}
+                      className='postInput'
+                      name='postInput'
+                    ></textarea>
+                    <div className='postbuttons'>
+                      <button type='submit' className='postButton'>
+                        <FiSend className='postIcon' />
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              </form>
-            </div>
-          </div>
-             
+              </div>
+
             </MDBTypography>
           </MDBCol>
-        </div>
-        {/* {showPostCard && (
-          <div className='cardWrapper'>
-            <div className='chatCard'>
-              <button className='cancelButton' onClick={handlePostCancel}>
-                <FiX className='cancelIcon' />
-              </button>
-              <h2>Write a post</h2>
-              <form onSubmit={handlePostSubmit}>
-                <textarea
-                  placeholder='Write something...'
-                  className='postInput'
-                  name='postInput'
-                ></textarea>
-                <br />
-                <div className='postbuttons'>
-                  <label htmlFor='fileInput' className='fileInput'>
-                    <FaPaperclip className='paperclipIcon' />
-                    <input
-                      type='file'
-                      id='fileInput'
-                      accept='image/*'
-                      style={{ display: 'none' }}
-                    />
-                  </label>
-                  <button type='submit' className='postButton'>
-                    <FiSend className='postIcon' />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )} */}
-        <>
-         
-        </>
+        </div>        
       </>
     </body>
   );
 }
+

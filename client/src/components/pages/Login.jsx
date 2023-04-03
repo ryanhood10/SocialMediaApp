@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 
-import authService from '../../utils/auth'
+import Auth from '../../utils/auth'
 
 
 export default function LoginFunction() {
@@ -47,7 +47,7 @@ export default function LoginFunction() {
     if (password.length < 1) {
       setValidationErrors({
         ...validationErrors,
-        password: true
+        password: true 
       });
     } else {
       setValidationErrors({
@@ -56,31 +56,18 @@ export default function LoginFunction() {
       });
     }
 
-    //Ryans Authentication token service
-    // try {
-    //   const response = await authService.login(email, password);
-    //   if (response && response.token) {
-    //     navigate('/Homepage'); // Replace '/' with the actual route you want to navigate to
-    //   } else {
-    //     alert('Login failed. Please check your email and password.');
-    //   }
-    // } catch (error) {
-    //   alert('An error occurred during login. Please try again.');
-    // }
-
+    //Ryans Authentication token service and login resolver
     try {
       const data = await login({
         variables: { input: { email: email, password: password } },
       });
+      Auth.login(data.token)
       setEmail('');
       setPassword('');
-      console.log(email)
-      // navigate("/Homepage")
-      console.log("Here is the data!!!")
-      console.log(data)
-      // window.location.href = "http://localhost:3000/homepage";
+      navigate("/Homepage")
     }
     catch (err) {
+      alert('An error occurred during login. Please try again.');
       console.error(err);
     }
   }

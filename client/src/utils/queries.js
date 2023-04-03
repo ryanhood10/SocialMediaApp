@@ -9,9 +9,17 @@ query Me {
   }
 }`;
 
+export const SEARCH = gql`
+query User($username: String!) {
+  user(username: $username) {
+    username
+  }
+}`;
+
 export const USER_PROFILE = gql`
 query Me {
   me {
     username
   }
+  token
 }`;
