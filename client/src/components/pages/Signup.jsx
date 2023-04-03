@@ -5,7 +5,7 @@ import logo2 from '../../assets/images/NewLogo.png'
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'
 import { SIGNUP } from '../../utils/mutations';
-import AuthService from '../../utils/auth.js';
+// import AuthService from '../../utils/auth.js';
 // CHANGE: changed signup to SignupForm to enable the variable signup to be used within it.
 const SignupForm = () => {
 
@@ -13,7 +13,7 @@ const SignupForm = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const authService = new AuthService();
+  // const authService = new AuthService();
   const navigate = useNavigate();
 
   // implementation of SIGNUP mutation
@@ -22,19 +22,19 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //try catch for user token authentication servuce
-    try {
-      const response = await authService.signup({ username, email, password });
+    // try {
+      // const response = await authService.signup({ username, email, password });
 
-      if (response && response.token) {
-        navigate('/'); // Navigate to the home page
-      } else {
-        alert('Signup failed. Please check your information and try again.');
-      }
+      // if (response && response.token) {
+      //   navigate('/'); // Navigate to the home page
+      // } else {
+      //   alert('Signup failed. Please check your information and try again.');
+      // }
       // catch is catching for a wierd reason.
-    } catch (error) {
-      console.log(error)
-      alert('An error occurred during signup. Please try again.');
-    }
+    // } catch (error) {
+    //   console.log(error)
+    //   alert('An error occurred during signup. Please try again.');
+    // }
     // try catch used for the mutation
     try {
       const data = await signup({
