@@ -8,6 +8,7 @@ mutation Signup($input: SignupInput!) {
         email
         password
       }
+      token
     }
 }`;
 
@@ -21,3 +22,10 @@ mutation Login($input: LoginInput!) {
       token
     }
 }`;
+
+export const ADDFRIEND = gql`
+mutation AddFriend($friendId: ID!) {
+  addFriend(friendId: $friendId) {
+    _id
+  }
+}`
