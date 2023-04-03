@@ -5,8 +5,8 @@ import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from 'react-icons/bi'
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from "@apollo/client";
-import { ADDFRIEND } from '../../utils/mutations';
+// import { useMutation, useQuery } from "@apollo/client";
+// import { ADDFRIEND } from '../../utils/mutations';
 
 
 export default function Profile() {
@@ -19,11 +19,11 @@ export default function Profile() {
   const [bio, setBio] = useState('');
 
   // add friend
-  const [ loading,userId ] = useQuery()
-  const [addFriend] = useMutation(ADDFRIEND)
-  const addingFriend = () => {
+  // const [ loading,userId ] = useQuery()
+  // const [addFriend] = useMutation(ADDFRIEND)
+  // const addingFriend = () => {
 
-  }
+  // }
 
 
 
@@ -158,8 +158,9 @@ export default function Profile() {
                         <p className="small text-muted mb-0">Following</p>
                       </div>
                       <button
-                        value= {userId._id}
-                        className="followBtn" onClick= {addFriend}>
+                        // value= {userId._id}
+                        // className="followBtn" onClick= {addFriend}
+                        >
                         addFriend
                       </button>
                     </div>
