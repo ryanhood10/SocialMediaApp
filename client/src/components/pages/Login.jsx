@@ -31,7 +31,7 @@ export default function LoginFunction() {
 
   // this is what is happening on a click
   const handleOnClick = async (event) => {
-    // event.preventDefault()
+    event.preventDefault()
     if (email.length < 1) {
       setValidationErrors({
         ...validationErrors,
@@ -72,10 +72,12 @@ export default function LoginFunction() {
       const data = await login({
         variables: { input: { email: email, password: password } },
       });
-      console.log(data)
       setEmail('');
       setPassword('');
-      navigate("/Homepage")
+      console.log(email)
+      // navigate("/Homepage")
+      console.log("Here is the data!!!")
+      console.log(data)
       // window.location.href = "http://localhost:3000/homepage";
     }
     catch (err) {
