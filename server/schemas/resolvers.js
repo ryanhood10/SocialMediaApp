@@ -82,19 +82,16 @@ const resolvers = {
     },
   
     createMessage: async (parent, args, context) => {
-      console.log("Something is here!", context.user)
-      console.log(args)
       // spread opporator should copy args and then append username to it to give it a user to refer to.  
       if (context.user) {
-        const message = await Message.create({ ...args, username: context.user.username });
+        const message = await Message.create({ MessageText: args.input.MessageText, username: context.user.username });
 
-        console.log('message', message)
-
-        await User.findByIdAndUpdate(
+        const updated_user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { messages: message._id } },
           { new: true }
         );
+        console.log(updated_user)
   
         return message;
       };

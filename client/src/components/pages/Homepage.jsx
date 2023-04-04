@@ -54,6 +54,7 @@ export default function Homepage() {
     const { data } = addMessage({
       variables: { input: {MessageText: message} },
     });
+    console.log(data)
 
     const postInput = e.target.elements.postInput.value;
     const post = {

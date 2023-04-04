@@ -15,9 +15,9 @@ const typeDefs = gql`
     _id: ID
     MessageText: String!
     createdAt: String
-    username: String!
+    username: String
     replies: [Reply]
-    replyCount: Int!
+    replyCount: Int
   }
 
   type Reply {
