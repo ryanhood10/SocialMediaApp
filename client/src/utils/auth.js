@@ -28,8 +28,9 @@ export default new class AuthService {
     }
     // Authenticate the user, save the token to localStorage, and redirect to the home page
     login(idToken) {
+        console.log("This is the auth.js token")
+        console.log(idToken)
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/');
     }
     // Remove the token from localStorage and redirect to the login page
     logout() {

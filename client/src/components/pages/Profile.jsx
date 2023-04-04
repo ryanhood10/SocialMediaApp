@@ -4,12 +4,23 @@ import '../../assets/profile.css';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from 'react-icons/bi'
-import { Link } from 'react-router-dom';
-// import { useMutation, useQuery } from "@apollo/client";
+import { Link, useParams } from 'react-router-dom';
+import { useMutation, useQuery } from "@apollo/client";
+import { USER_PROFILE } from "../../utils/queries";
 // import { ADDFRIEND } from '../../utils/mutations';
 
 
 export default function Profile() {
+  const { username } = useParams();
+
+  const { loading, data } = useQuery(USER_PROFILE, {
+    variables: { username: username },
+  });
+  // console.log(data)
+  // const profileName = data.username
+  
+
+
   const [profilePicture, setProfilePic] = useState(null);
   const fileInputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -72,6 +83,8 @@ export default function Profile() {
 
   return (
     <>
+    {/* {username ? <h5>{username}</h5> : <h5>Loading...</h5>} */}
+    <div>{data?.username}</div>
       <header className='headerProfile'>
         <form className='searchForm'>
           <input type='text' placeholder='Search' className='searchInput' />
@@ -137,8 +150,7 @@ export default function Profile() {
                   </div>
                   <div className="ms-3 thirdRow">
                     {/* This is where the username should go */}
-                    {/* {username ? <h5>{username}</h5> : <h5>Loading...</h5>} */}
-
+                    <div>{data?.user.username}</div>
 
                   </div>
                 </div>
