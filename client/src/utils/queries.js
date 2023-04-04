@@ -3,8 +3,13 @@ import { gql } from '@apollo/client'
 export const USER = gql`
 query Me {
   me {
+    username
+    messages{
+      _id
+    }
     friends {
       username
+      _id
     }
   }
 }`;

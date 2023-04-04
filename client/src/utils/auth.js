@@ -36,7 +36,6 @@ export default new class AuthService {
     logout() {
         localStorage.removeItem('id_token');
         // resets the page and removes token therefore porting them back to the login page
-        window.location.reload()
     }
 }
 
