@@ -20,7 +20,7 @@ const SignupForm = () => {
   const [signup] = useMutation(SIGNUP)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     //try catch for user token authentication servuce
     
     // try {

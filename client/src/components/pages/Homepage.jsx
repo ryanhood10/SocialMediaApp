@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { FiSend } from 'react-icons/fi';
@@ -9,6 +9,8 @@ import { useQuery } from "@apollo/client";
 import { USER, SEARCH } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
+import Auth from '../../utils/auth'
+import { useNavigate } from 'react-router-dom'
 // import FriendList from './FriendList';
 import {
   MDBCol,
@@ -29,6 +31,7 @@ export default function Homepage() {
   // mutation
   const [ addMessage, {error} ] = useMutation(MESSAGES)
 
+  const navigate = useNavigate();
 
 
   const [showPostCard, setShowPostCard] = useState(false);
@@ -38,6 +41,11 @@ export default function Homepage() {
     if(e.target.name === "postInput"){
       setMessage(e.target.value)
     }
+  }
+
+  const handleClick = (e) => {
+    Auth.logout()
+    navigate("/")
   }
 
   const handlePostSubmit = (e) => {
@@ -103,8 +111,10 @@ export default function Homepage() {
             {/* This is the logout button */}
             <li title='Logout' data-title-delay='10'>
               <Link to='/'>
-                <button className='navButton'>
-                  <BiLogOutCircle className='navIcon' />
+                <button 
+                className='navButton'
+                onClick= {handleClick}>
+                  <BiLogOutCircle className='navIcon'/>
                   <p className='navText'> Logout </p>
                 </button>
               </Link>
