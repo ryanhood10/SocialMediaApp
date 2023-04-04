@@ -6,10 +6,10 @@ import { CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from 'react-icons/bi'
 import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from "@apollo/client";
-import { USER_PROFILE } from "../../utils/queries";
+import { USER_PROFILE  } from "../../utils/queries";
 // import { ADDFRIEND } from '../../utils/mutations';
-
-
+import SearchBar from '../Searchbar';
+import { ADDFRIEND  } from "../../utils/mutations";
 
 export default function Profile() {
   const { username } = useParams();
@@ -30,12 +30,18 @@ export default function Profile() {
   // const [isFollowing, setIsFollowing] = useState(false);
   const [bio, setBio] = useState('');
 
-  // add friend
-  // const [ loading,userId ] = useQuery()
-  // const [addFriend] = useMutation(ADDFRIEND)
-  // const addingFriend = () => {
+  // add friend state and funcion
+  const [addFriend, { error }] = useMutation(ADDFRIEND);
 
-  // }
+  const handleAddFriend = async () => {
+    try {
+      await addFriend({ variables: { friendId: data.user._id } });
+      // You can update the UI accordingly here, for example, change the "addFriend" button to "Friend Added"
+    } catch (error) {
+      console.error(error);
+      // Handle the error, for example, show an error message to the user
+    }
+  };
 
 
 
@@ -88,12 +94,9 @@ export default function Profile() {
     <div>{data?.user.username}</div>
 
       <header className='headerProfile'>
-        <form className='searchForm'>
-          <input type='text' placeholder='Search' className='searchInput' />
-          <button type='submit' className='searchButton'>
-            <FaSearch className='searchIcon' />
-          </button>
-        </form>
+       {/* Render the search bar component here */}
+    <SearchBar />
+
 
         <nav className='sideNav'>
           <ul>
@@ -171,12 +174,10 @@ export default function Profile() {
                         <p className="mb-1 h5">0</p>
                         <p className="small text-muted mb-0">Following</p>
                       </div>
-                      <button
-                        // value= {userId._id}
-                        // className="followBtn" onClick= {addFriend}
-                        >
-                        addFriend
-                      </button>
+                      
+                      
+                      <button onClick={handleAddFriend}>addFriend</button>
+
                     </div>
                   </div>
                 </div>
