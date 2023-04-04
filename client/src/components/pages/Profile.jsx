@@ -10,6 +10,7 @@ import { USER_PROFILE } from "../../utils/queries";
 // import { ADDFRIEND } from '../../utils/mutations';
 
 
+
 export default function Profile() {
   const { username } = useParams();
 
@@ -84,7 +85,8 @@ export default function Profile() {
   return (
     <>
     {/* {username ? <h5>{username}</h5> : <h5>Loading...</h5>} */}
-    <div>{data?.username}</div>
+    <div>{data?.user.username}</div>
+
       <header className='headerProfile'>
         <form className='searchForm'>
           <input type='text' placeholder='Search' className='searchInput' />
