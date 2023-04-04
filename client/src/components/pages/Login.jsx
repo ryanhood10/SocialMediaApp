@@ -58,12 +58,16 @@ export default function LoginFunction() {
 
     //Ryans Authentication token service and login resolver
     try {
-      const data = await login({
+
+      const response = await login({
         variables: { input: { email: email, password: password } },
       });
-      Auth.login(data.token)
-      setEmail('');
-      setPassword('');
+      console.log(response.data.login.token)
+      Auth.login(response.data.login.token)
+      
+
+      // setEmail('');
+      // setPassword('');
       navigate("/Homepage")
     }
     catch (err) {

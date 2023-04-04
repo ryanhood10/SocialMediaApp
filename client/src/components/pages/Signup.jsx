@@ -22,6 +22,7 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //try catch for user token authentication servuce
+    
     // try {
       // const response = await authService.signup({ username, email, password });
 
@@ -35,6 +36,7 @@ const SignupForm = () => {
     //   console.log(error)
     //   alert('An error occurred during signup. Please try again.');
     // }
+
     // try catch used for the mutation
     try {
       const data = await signup({
@@ -44,7 +46,7 @@ const SignupForm = () => {
       setUsername('');
       setEmail('');
       setPassword('');
-      navigate("/Homepage");
+      // navigate("/Homepage");
     }
     catch (err) {
       console.error(err);

@@ -7,6 +7,8 @@ import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
 import { useQuery } from "@apollo/client";
 import { USER, SEARCH } from '../../utils/queries';
+import { useMutation } from '@apollo/client';
+import { MESSAGES } from '../../utils/mutations';
 // import FriendList from './FriendList';
 import {
   MDBCol,
@@ -19,42 +21,45 @@ export default function Homepage() {
   //queries
   const { loading, data } = useQuery(USER)
   const friends = data?.friends || [];
-  console.log(friends)
 
   // states
   const [search, setSearch] = useState('')
   const [message, setMessage] = useState('')
+
+  // mutation
+  const [ addMessage, {error} ] = useMutation(MESSAGES)
 
 
 
   const [showPostCard, setShowPostCard] = useState(false);
   const [posts, setPosts] = useState([]);
 
-  const handlePostButtonClick = () => {
-    setShowPostCard(!showPostCard);
-  };
+  const handleInputChange = (e) => {
+    if(e.target.name === "postInput"){
+      setMessage(e.target.value)
+    }
+  }
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
+    console.log(message)
+    const { data } = addMessage({
+      variables: { input: {MessageText: message} },
+    });
+
     const postInput = e.target.elements.postInput.value;
     const post = {
       content: postInput,
       date: new Date().toLocaleString(),
-      user: {
-        name: 'John Doe',
-        pictureUrl: '',
-      },
+      name: "Andrew"
     };
     setPosts([post, ...posts]);
     setShowPostCard(false);
   };
-  const handlePostCancel = () => {
-    setShowPostCard(false);
-  }
+ 
 
   return (
-    <body className="gradientBackground">
-      <>
+    <div className="gradientBackground">
         <header className='header'>
           <div className='logo'>
             <p className='Logo'>
@@ -66,7 +71,6 @@ export default function Homepage() {
           <form className='searchForm'>
             <input 
               type='text'
-              value= {search}
               placeholder='Search'
               className='searchInput'
             />            
@@ -89,7 +93,7 @@ export default function Homepage() {
             </li>
             {/* This is the profile button */}
             <li title='Profile' data-title-delay='10'>
-              <Link to='/Profile'>
+              <Link to='/Profile/'>
                 <button className='navButton'>
                   <CgProfile className='navIcon' />
                   <p className='navText'> Profile </p>
@@ -139,8 +143,8 @@ export default function Homepage() {
                 <div className='chatCard'>
                   <form onSubmit={handlePostSubmit}>
                     <textarea
+                      onChange= {handleInputChange}
                       placeholder='Write something...'
-                      value= {message}
                       className='postInput'
                       name='postInput'
                     ></textarea>
@@ -156,8 +160,7 @@ export default function Homepage() {
             </MDBTypography>
           </MDBCol>
         </div>        
-      </>
-    </body>
+    </div>
   );
 }
 

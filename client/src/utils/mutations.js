@@ -29,3 +29,10 @@ mutation AddFriend($friendId: ID!) {
     _id
   }
 }`
+
+export const MESSAGES = gql`
+mutation CreateMessage($input: MessageInput!) {
+  createMessage(input: $input) {
+    MessageText
+  }
+}`

@@ -17,9 +17,13 @@ query User($username: String!) {
 }`;
 
 export const USER_PROFILE = gql`
-query Me {
-  me {
+query User($username: String!) {
+  user(username: $username) {
+    _id
+    friendCount
+    messages {
+      _id
+    }
     username
   }
-  token
 }`;
