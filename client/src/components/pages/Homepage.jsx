@@ -11,7 +11,6 @@ import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 
-import { useNavigate } from 'react-router-dom'
 // import FriendList from './FriendList';
 //NEW CODE import searchBar component
 import SearchBar from '../Searchbar';
@@ -31,7 +30,7 @@ export default function Homepage() {
   const { loading, data } = useQuery(USER)
   ;
   const { loading: userLoading, data: userData } = useQuery(USER);
-  
+
 // friendlist query
   const { loading1, friendsList } = useQuery(USER)
   const friends = friendsList?.friends || [];
