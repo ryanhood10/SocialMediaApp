@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from "@apollo/client";
 import { USER_PROFILE } from "../../utils/queries";
 // import { ADDFRIEND } from '../../utils/mutations';
-
+import SearchBar from '../Searchbar';
 
 
 export default function Profile() {
@@ -88,12 +88,9 @@ export default function Profile() {
     <div>{data?.user.username}</div>
 
       <header className='headerProfile'>
-        <form className='searchForm'>
-          <input type='text' placeholder='Search' className='searchInput' />
-          <button type='submit' className='searchButton'>
-            <FaSearch className='searchIcon' />
-          </button>
-        </form>
+       {/* Render the search bar component here */}
+    <SearchBar />
+
 
         <nav className='sideNav'>
           <ul>
