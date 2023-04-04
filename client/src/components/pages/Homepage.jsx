@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { FiSend } from 'react-icons/fi';
@@ -10,11 +10,13 @@ import { USER, SEARCH } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
+
 import { useNavigate } from 'react-router-dom'
 // import FriendList from './FriendList';
 //NEW CODE import searchBar component
 import SearchBar from '../Searchbar';
 import { client } from "../../App";
+
 
 
 import {
@@ -23,15 +25,28 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 
-
 export default function Homepage() {
   //queries
+
   const { loading, data } = useQuery(USER)
   const friends = data?.friends || [];
   const { loading: userLoading, data: userData } = useQuery(USER);
 
   // states
  // const [search, setSearch] = useState('')
+
+
+  // friendlist query
+  const { loading1, friendsList } = useQuery(USER)
+  const friends = friendsList?.friends || [];
+
+  // user search query: this query is supposed to run through the usernames to spit out a URL that ends in /Profile/username
+  // the username is supposed to work by being a template literal in the navigate function below at line 56, call the search button, the corresponding onClick at line 98
+  const { loading2, searching } = useQuery(SEARCH)
+  const userSearch = searching
+
+  // states
+
   const [message, setMessage] = useState('')
   const [searchTerm, setSearchTerm] = useState(''); // new state for search term
 
@@ -39,6 +54,7 @@ export default function Homepage() {
   // mutation
   const [ addMessage, {error} ] = useMutation(MESSAGES)
 
+  // moving through pages
   const navigate = useNavigate();
 
 
@@ -54,6 +70,10 @@ export default function Homepage() {
   const handleClick = (e) => {
     Auth.logout()
     navigate("/")
+  }
+
+  const searchButton = (e) => {
+    navigate(`/Profile/${userSearch}`)
   }
 
   const handlePostSubmit = (e) => {
@@ -101,9 +121,10 @@ export default function Homepage() {
           </div>
 
           {/* This is the search bar */}
-          
+
     {/* Render the search bar component here */}
     <SearchBar />
+
 
 
           {/* This is the homepage button */}
