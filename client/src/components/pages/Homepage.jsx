@@ -11,6 +11,14 @@ import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 
+import { useNavigate } from 'react-router-dom'
+// import FriendList from './FriendList';
+//NEW CODE import searchBar component
+import SearchBar from '../Searchbar';
+import { client } from "../../App";
+
+
+
 import {
   MDBCol,
   MDBCard,
@@ -19,6 +27,14 @@ import {
 
 export default function Homepage() {
   //queries
+
+  const { loading, data } = useQuery(USER)
+  const friends = data?.friends || [];
+  const { loading: userLoading, data: userData } = useQuery(USER);
+
+  // states
+ // const [search, setSearch] = useState('')
+
 
   // friendlist query
   const { loading1, friendsList } = useQuery(USER)
@@ -30,7 +46,10 @@ export default function Homepage() {
   const userSearch = searching
 
   // states
+
   const [message, setMessage] = useState('')
+  const [searchTerm, setSearchTerm] = useState(''); // new state for search term
+
 
   // mutation
   const [ addMessage, {error} ] = useMutation(MESSAGES)
@@ -74,7 +93,23 @@ export default function Homepage() {
     setPosts([post, ...posts]);
     setShowPostCard(false);
   };
- 
+
+  // const handleSearch = async (e) => {
+  //   e.preventDefault();
+  //   // Check if searchTerm exists in the user database
+  //   const { data: userData } = await client.query({
+  //     query: USER,
+  //     variables: { username: searchTerm },
+  //   });
+  
+  //   // If user exists, navigate to the corresponding profile page
+  //   if (userData.user) {
+  //     navigate(`/profile/${userData.user.username}`);
+  //   } else {
+  //     alert("User not found!");
+  //   }
+  // };
+  
 
   return (
     <div className="gradientBackground">
@@ -86,22 +121,11 @@ export default function Homepage() {
           </div>
 
           {/* This is the search bar */}
-          <form className='searchForm'>
 
-            <input 
-              type='text'
-              placeholder='Search'
-              className='searchInput'
-            />
+    {/* Render the search bar component here */}
+    <SearchBar />
 
-            <button 
-            onClick={searchButton}
-            type='submit' 
-            className='searchButton'>
-            <FaSearch className='searchIcon' />
-            </button>
 
-          </form>
 
           {/* This is the homepage button */}
         </header>
@@ -117,12 +141,15 @@ export default function Homepage() {
             </li>
             {/* This is the profile button */}
             <li title='Profile' data-title-delay='10'>
-              <Link to='/Profile/'>
-                <button className='navButton'>
-                  <CgProfile className='navIcon' />
-                  <p className='navText'> Profile </p>
-                </button>
-              </Link>
+            <Link to={`/profile/${data?.me.username}`}>
+  <button className='navButton'>
+    <CgProfile className='navIcon' />
+    <p className='navText'>
+      Profile
+    </p>
+  </button>
+</Link>
+
             </li>
             {/* This is the logout button */}
             <li title='Logout' data-title-delay='10'>

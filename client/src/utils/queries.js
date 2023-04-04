@@ -15,11 +15,12 @@ query Me {
 }`;
 
 export const SEARCH = gql`
-query User($username: String!) {
-  user(username: $username) {
-    username
+  query Search($searchTerm: String!) {
+    search(searchTerm: $searchTerm) {
+      username
+    }
   }
-}`;
+`;
 
 export const USER_PROFILE = gql`
 query User($username: String!) {
@@ -32,3 +33,12 @@ query User($username: String!) {
     username
   }
 }`;
+
+// new code for searching users
+export const SEARCH_USER = gql`
+  query SearchUser($searchTerm: String!) {
+    searchUser(searchTerm: $searchTerm) {
+      username
+    }
+  }
+`;

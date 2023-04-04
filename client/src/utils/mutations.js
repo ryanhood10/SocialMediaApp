@@ -36,3 +36,4 @@ mutation CreateMessage($input: MessageInput!) {
     MessageText
   }
 }`
+

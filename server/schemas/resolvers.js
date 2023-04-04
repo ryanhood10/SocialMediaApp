@@ -30,6 +30,7 @@ const resolvers = {
         .populate('messages')
         .populate('friends');
     },
+    
   
     // get all messages
     messages: async (parent, { username, offset = 0, limit = 10 }) => {
