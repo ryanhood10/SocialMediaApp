@@ -11,7 +11,6 @@ import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 
-import { useNavigate } from 'react-router-dom'
 // import FriendList from './FriendList';
 //NEW CODE import searchBar component
 import SearchBar from '../Searchbar';
@@ -29,16 +28,17 @@ export default function Homepage() {
   //queries
 
   const { loading, data } = useQuery(USER)
-  const friends = data?.friends || [];
+  ;
   const { loading: userLoading, data: userData } = useQuery(USER);
 
+// friendlist query
+  const { loading1, friendsList } = useQuery(USER)
+  const friends = friendsList?.friends || [];
   // states
  // const [search, setSearch] = useState('')
 
 
-  // friendlist query
-  const { loading1, friendsList } = useQuery(USER)
-  const friends = friendsList?.friends || [];
+  
 
   // user search query: this query is supposed to run through the usernames to spit out a URL that ends in /Profile/username
   // the username is supposed to work by being a template literal in the navigate function below at line 56, call the search button, the corresponding onClick at line 98
