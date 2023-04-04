@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { FiSend } from 'react-icons/fi';
@@ -10,27 +10,32 @@ import { USER, SEARCH } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
-import { useNavigate } from 'react-router-dom'
-// import FriendList from './FriendList';
+
 import {
   MDBCol,
   MDBCard,
   MDBTypography,
 } from "mdb-react-ui-kit";
 
-
 export default function Homepage() {
   //queries
-  const { loading, data } = useQuery(USER)
-  const friends = data?.friends || [];
+
+  // friendlist query
+  const { loading1, friendsList } = useQuery(USER)
+  const friends = friendsList?.friends || [];
+
+  // user search query: this query is supposed to run through the usernames to spit out a URL that ends in /Profile/username
+  // the username is supposed to work by being a template literal in the navigate function below at line 56, call the search button, the corresponding onClick at line 98
+  const { loading2, searching } = useQuery(SEARCH)
+  const userSearch = searching
 
   // states
-  const [search, setSearch] = useState('')
   const [message, setMessage] = useState('')
 
   // mutation
   const [ addMessage, {error} ] = useMutation(MESSAGES)
 
+  // moving through pages
   const navigate = useNavigate();
 
 
@@ -46,6 +51,10 @@ export default function Homepage() {
   const handleClick = (e) => {
     Auth.logout()
     navigate("/")
+  }
+
+  const searchButton = (e) => {
+    navigate(`/Profile/${userSearch}`)
   }
 
   const handlePostSubmit = (e) => {
@@ -78,14 +87,20 @@ export default function Homepage() {
 
           {/* This is the search bar */}
           <form className='searchForm'>
+
             <input 
               type='text'
               placeholder='Search'
               className='searchInput'
-            />            
-            <button type='submit' className='searchButton'>
-              <FaSearch className='searchIcon' />
-            </button>            
+            />
+
+            <button 
+            onClick={searchButton}
+            type='submit' 
+            className='searchButton'>
+            <FaSearch className='searchIcon' />
+            </button>
+
           </form>
 
           {/* This is the homepage button */}
