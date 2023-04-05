@@ -1,3 +1,4 @@
+@media only screen and (min-width: 768px) {
 .loginBody {
     background-color: rgba(114, 110, 110, 0.08);
 }
@@ -5,9 +6,7 @@
 .logoimg {
     width: 100%;
     margin-top: 15%;
-    /* border-radius: 10px; */
     align-items: center;
-    /* box-shadow: whitesmoke 0 0 5px; */
     padding-bottom: 60px;
 }
 
@@ -53,4 +52,39 @@ footer li {
     font-size: large;
     font-weight: 600;
     
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .logoimg {
+        width:70%;
+        margin-top: 10%;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .loginHeader {
+        width: 100%;
+        background-color: rgba(41, 32, 68, 0.336);
+        text-align: center;
+        padding: 10px;
+        font-weight: larger;
+        text-decoration: none;
+        font-size: 30px;
+        font-family: fantasy;
+        font-weight: 100;
+        text-shadow: white 0 0 5px;
+    }
+
+    .theform {
+        border: solid 8px rgb(133, 83, 153);
+        border-radius: 10%;
+        border-style: inset;
+        background-color: rgba(194, 161, 161, 0.181);
+        padding: 10px;
+        position: inherit;
+        margin-top: 8%;
+        width: inherit;
+        box-shadow: whitesmoke 0 0 5px;
+    }
 }

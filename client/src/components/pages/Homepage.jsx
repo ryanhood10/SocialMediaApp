@@ -28,17 +28,17 @@ export default function Homepage() {
   //queries
 
   const { loading, data } = useQuery(USER)
-  ;
+    ;
   const { loading: userLoading, data: userData } = useQuery(USER);
 
-// friendlist query
+  // friendlist query
   const { loading1, friendsList } = useQuery(USER)
   const friends = friendsList?.friends || [];
   // states
- // const [search, setSearch] = useState('')
+  // const [search, setSearch] = useState('')
 
 
-  
+
 
   // user search query: this query is supposed to run through the usernames to spit out a URL that ends in /Profile/username
   // the username is supposed to work by being a template literal in the navigate function below at line 56, call the search button, the corresponding onClick at line 98
@@ -52,7 +52,7 @@ export default function Homepage() {
 
 
   // mutation
-  const [ addMessage, {error} ] = useMutation(MESSAGES)
+  const [addMessage, { error }] = useMutation(MESSAGES)
 
   // moving through pages
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function Homepage() {
   const [posts, setPosts] = useState([]);
 
   const handleInputChange = (e) => {
-    if(e.target.name === "postInput"){
+    if (e.target.name === "postInput") {
       setMessage(e.target.value)
     }
   }
@@ -80,7 +80,7 @@ export default function Homepage() {
     e.preventDefault();
     console.log(message)
     const { data } = addMessage({
-      variables: { input: {MessageText: message} },
+      variables: { input: { MessageText: message } },
     });
     console.log(data)
 
@@ -101,7 +101,7 @@ export default function Homepage() {
   //     query: USER,
   //     variables: { username: searchTerm },
   //   });
-  
+
   //   // If user exists, navigate to the corresponding profile page
   //   if (userData.user) {
   //     navigate(`/profile/${userData.user.username}`);
@@ -109,110 +109,110 @@ export default function Homepage() {
   //     alert("User not found!");
   //   }
   // };
-  
+
 
   return (
     <div className="gradientBackground">
-        <header className='header'>
-          <div className='logo'>
-            <p className='Logo'>
-              Word On The Street
-            </p>
-          </div>
-
-          {/* This is the search bar */}
-
-    {/* Render the search bar component here */}
-    <SearchBar />
-
-
-
-          {/* This is the homepage button */}
-        </header>
-        <nav className='sideNav'>
-          <ul>
-            <li title='Home' data-title-delay='10'>
-              <Link to='/Homepage'>
-                <button className='navButton'>
-                  <FaHome className='navIcon' />
-                  <p className='navText'> Home </p>
-                </button>
-              </Link>
-            </li>
-            {/* This is the profile button */}
-            <li title='Profile' data-title-delay='10'>
-            <Link to={`/profile/${data?.me.username}`}>
-  <button className='navButton'>
-    <CgProfile className='navIcon' />
-    <p className='navText'>
-      Profile
-    </p>
-  </button>
-</Link>
-
-            </li>
-            {/* This is the logout button */}
-            <li title='Logout' data-title-delay='10'>
-              <Link to='/'>
-                <button 
-                className='navButton'
-                onClick= {handleClick}>
-                  <BiLogOutCircle className='navIcon'/>
-                  <p className='navText'> Logout </p>
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* friends list to be edited */}
-        <div className='friendsList'>
-          <h2>Friends</h2>
-          {friends.slice(0, 3).map((friend) => (
-            <div className='friend' key={friend.id}>
-              <img src={friend.avatar} alt='Friend' />
-              <span>{friend.name}</span>
-            </div>
-          ))}
+      <header className='header'>
+        <div className='logo'>
+          <p className='Logo'>
+            Word On The Street
+          </p>
         </div>
 
-        {/* This is the chatbox */}
-        <div className='chatbox'>
-          <MDBCol md="6" lg="7" xl="8">
-            <MDBTypography listUnStyled>
-              <li className="d-flex justify-content-between mb-4">
-                <MDBCard>
-                  <form className='postList'>
-                    {posts.map((post, index) => (
-                      <section className='post' key={index}>
-                        <p>{post.content}</p>
-                        <p>{post.date}</p>
-                      </section>
-                    ))}
-                  </form>
-                </MDBCard>
-              </li>
-              <div id='bottom'>
-                <div className='chatCard'>
-                  <form onSubmit={handlePostSubmit}>
-                    <textarea
-                      onChange= {handleInputChange}
-                      placeholder='Write something...'
-                      className='postInput'
-                      name='postInput'
-                    ></textarea>
-                    <div className='postbuttons'>
-                      <button type='submit' className='postButton'>
-                        <FiSend className='postIcon' />
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+        {/* This is the search bar */}
 
-            </MDBTypography>
-          </MDBCol>
-        </div>        
+        {/* Render the search bar component here */}
+        <SearchBar />
+
+
+
+        {/* This is the homepage button */}
+      </header>
+      <nav className='sideNav'>
+        <ul>
+          <li title='Home' data-title-delay='10'>
+            <Link to='/Homepage'>
+              <button className='navButton'>
+                <FaHome className='navIcon' />
+                <p className='navText'> Home </p>
+              </button>
+            </Link>
+          </li>
+          {/* This is the profile button */}
+          <li title='Profile' data-title-delay='10'>
+            <Link to={`/profile/${data?.me.username}`}>
+              <button className='navButton'>
+                <CgProfile className='navIcon' />
+                <p className='navText'>
+                  Profile
+                </p>
+              </button>
+            </Link>
+
+          </li>
+          {/* This is the logout button */}
+          <li title='Logout' data-title-delay='10'>
+            <Link to='/'>
+              <button
+                className='navButton'
+                onClick={handleClick}>
+                <BiLogOutCircle className='navIcon' />
+                <p className='navText'> Logout </p>
+              </button>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* friends list to be edited */}
+      <div className='friendsList'>
+        <h2>Friends</h2>
+        {friends.slice(0, 3).map((friend) => (
+          <div className='friend' key={friend.id}>
+            <img src={friend.avatar} alt='Friend' />
+            <span>{friend.name}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* This is the chatbox */}
+      <div className='chatbox'>
+        <MDBCol md="6" lg="7" xl="8">
+          <MDBTypography listUnStyled>
+            <li className="d-flex justify-content-between mb-4">
+              <MDBCard>
+                <form className='postList'>
+                  {posts.map((post, index) => (
+                    <section className='post' key={index}>
+                      <p>{post.content}</p>
+                      <p>{post.date}</p>
+                    </section>
+                  ))}
+                </form>
+              </MDBCard>
+            </li>
+            <div id='bottom'>
+              <div className='chatCard'>
+                <form onSubmit={handlePostSubmit}>
+                  <textarea
+                    onChange={handleInputChange}
+                    placeholder='Write something...'
+                    className='postInput'
+                    name='postInput'
+                  ></textarea>
+                  <div className='postbuttons'>
+                    <button type='submit' className='postButton'>
+                      <FiSend className='postIcon' />
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </MDBTypography>
+        </MDBCol>
+      </div>
     </div>
   );
 }
