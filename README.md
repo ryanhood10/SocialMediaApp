@@ -5,6 +5,22 @@ The application provides users with the ability to send and receive text message
 change their usernames and profile pictures, and view a list of all the users in the room,including their usernames and profile pictures. 
 The chat application automatically saves chat history for each room, allowing users to view previous conversations.
 
+## Tech Stack
+
+**Client & Server :** 
+
+React
+GraphQL with a Node.js 
+Express.js 
+Bootstrap
+MongoDB and the Mongoose ODM for the database
+HTML,JAVASCRIPT & CSS
+
+## Usage
+
+After signing up and creating an account, users can join a chat room and start chatting with other users in real-time. 
+They can change their usernames and profile pictures, and send text messages, images, and emojis to other users in the room. 
+Users can view a list of all the users in the room and leave (sign out) the room at any time. The chat application automatically saves chat history for each room, allowing users to view previous conversations.
 ## Run Locally
 
 Clone the project
@@ -35,24 +51,8 @@ Start the client
   npm run start
 ```
 
-## Usage
-
-After signing up and creating an account, users can join a chat room and start chatting with other users in real-time. 
-They can change their usernames and profile pictures, and send text messages, images, and emojis to other users in the room. 
-Users can view a list of all the users in the room and leave (sign out) the room at any time. The chat application automatically saves chat history for each room,
-allowing users to view previous conversations.
-
 ## Screenshots
 
-## Tech Stack
-
-**Client & Server :** 
-
-React
-GraphQL with a Node.js 
-Express.js 
-Bootstrap
-MongoDB and the Mongoose ODM for the database
 
 ## Contributing
 
