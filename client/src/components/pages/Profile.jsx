@@ -31,9 +31,12 @@ export default function Profile() {
   // add friend state and funcion
   const [addFriend, { error }] = useMutation(ADDFRIEND);
 
+ 
   const handleAddFriend = async () => {
+    console.log(data?.user.username);
+    console.log(data?.user._id)
     try {
-      await addFriend({ variables: { friendId: data.user._id } });
+      await addFriend({ variables: { friendId: data?.user?._id } });
       // You can update the UI accordingly here, for example, change the "addFriend" button to "Friend Added"
     } catch (error) {
       console.error(error);
@@ -41,6 +44,7 @@ export default function Profile() {
     }
   };
 
+//
 
 
   // function that trigger the input file whenever
