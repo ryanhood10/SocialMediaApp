@@ -33,9 +33,19 @@ const resolvers = {
     
   
     // get all messages
-    messages: async (parent, { username, offset = 0, limit = 10 }) => {
-      const params = username ? { username } : {};
-      const messages = await Message.find(params)
+    // messages: async (parent, { username, offset = 0, limit = 10 }) => {
+    //   const params = username ? { username } : {};
+    //   const messages = await Message.find(params)
+    //     .sort({ createdAt: -1 })
+    //     .skip(offset)
+    //     .limit(limit);
+    
+    //   return messages;
+    // },
+
+    // NEW get all messages offset and limit allow for fitting the chatbox
+    messages: async (parent, { offset = 0, limit = 10 }) => {
+      const messages = await Message.find()
         .sort({ createdAt: -1 })
         .skip(offset)
         .limit(limit);
@@ -92,7 +102,7 @@ const resolvers = {
           { $push: { messages: message._id } },
           { new: true }
         );
-        console.log(updated_user)
+        
   
         return message;
       };

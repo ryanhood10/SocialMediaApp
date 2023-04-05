@@ -17,8 +17,6 @@ export default function Profile() {
   const { loading, data } = useQuery(USER_PROFILE, {
     variables: { username: username },
   });
-  // console.log(data)
-  // const profileName = data.username
   
 
 
@@ -70,7 +68,6 @@ export default function Profile() {
     if (savedBio) {
       setBio(savedBio);
     }
-    console.log()
 
   }, []);
 
@@ -112,7 +109,9 @@ export default function Profile() {
             </li>
             <li title='Logout' data-title-delay='10'>
               <Link to='/'>
-                <button className='navButton'>
+                <button 
+                className='navButton' 
+                onClick= {handleClick}>                 
                   <BiLogOutCircle className='navIcon' />
                   <p className='navText'>
                     Logout

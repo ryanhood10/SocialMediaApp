@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useQuery } from "@apollo/client";
 import { useNavigate } from 'react-router-dom';
-import { SEARCH_USER } from '../utils/queries';
+
 
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const { loading, error, data } = useQuery(SEARCH_USER, {
-    variables: { searchTerm },
-    skip: !searchTerm,
-  });
+const [searchTerm, setSearchTerm] = useState('');
 const navigate = useNavigate();
 
 

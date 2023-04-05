@@ -6,111 +6,100 @@ import { FiSend } from 'react-icons/fi';
 import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
 import { useQuery } from "@apollo/client";
-import { USER, SEARCH } from '../../utils/queries';
+import { CHAT, USER_PROFILE } from '../../utils/queries';
 import { useMutation } from '@apollo/client';
 import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
-
-// import FriendList from './FriendList';
-//NEW CODE import searchBar component
 import SearchBar from '../Searchbar';
 import { client } from "../../App";
-
-
-
 import {
   MDBCol,
   MDBCard,
   MDBTypography,
 } from "mdb-react-ui-kit";
-
 export default function Homepage() {
+  // how we navigate through pages
+  const navigate = useNavigate();
   //queries
-
-  const { loading, data } = useQuery(USER)
-    ;
-  const { loading: userLoading, data: userData } = useQuery(USER);
-
-  // friendlist query
-  const { loading1, friendsList } = useQuery(USER)
-  const friends = friendsList?.friends || [];
+  // 1. friendlist query
+  function FriendList() {
+    const { loading, error, data } = useQuery(USER_PROFILE, {
+      variables: { username: username }
+    });
+>>>>>>> main
+    if (loading) return 'Loading...';
+    if (error) return `Error: ${error.friend}`;
+    // Access the friends array in the data object
+    const friendslist = data.user.friends
+    return (
+      //Render the friends array as needed
+      <div>
+        {friendslist.map(friend => (
+          <div>
+            <p>{friend.username}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // 2. messages query
+  function Chatbox() {
+    const { loading, error, data } = useQuery(CHAT);
+    if (loading) return 'Loading...';
+    if (error) return `Error: ${error.message}`;
+    // Access the messages array in the data object
+    const messages = data.messages;
+    return (
+      // Render the messages array as needed
+      <div>
+        {messages.map(message => (
+          <div key={message.createdAt}>
+            <p>{message.username}: {message.MessageText}</p>
+            <small>{message.createdAt}</small>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  // NEW method of getting username
+  const profile = Auth.getProfile()
+  const username = profile.data.username
+  // mutations
+  const [addMessage, { error }] = useMutation(MESSAGES)
   // states
-  // const [search, setSearch] = useState('')
-
-
-
-
-  // user search query: this query is supposed to run through the usernames to spit out a URL that ends in /Profile/username
-  // the username is supposed to work by being a template literal in the navigate function below at line 56, call the search button, the corresponding onClick at line 98
-  const { loading2, searching } = useQuery(SEARCH)
-  const userSearch = searching
-
-  // states
-
+  // 1. message state
   const [message, setMessage] = useState('')
   const [searchTerm, setSearchTerm] = useState(''); // new state for search term
-
-
-  // mutation
-  const [addMessage, { error }] = useMutation(MESSAGES)
-
-  // moving through pages
-  const navigate = useNavigate();
-
-
+  // 2. post state
   const [showPostCard, setShowPostCard] = useState(false);
   const [posts, setPosts] = useState([]);
-
+  // EVENTS
+  // 1. message changes
   const handleInputChange = (e) => {
     if (e.target.name === "postInput") {
       setMessage(e.target.value)
     }
   }
-
+  // 2. logout button
   const handleClick = (e) => {
     Auth.logout()
     navigate("/")
   }
-
-  const searchButton = (e) => {
-    navigate(`/Profile/${userSearch}`)
-  }
-
+  // 3. message post button
   const handlePostSubmit = (e) => {
     e.preventDefault();
-    console.log(message)
     const { data } = addMessage({
       variables: { input: { MessageText: message } },
     });
-    console.log(data)
-
     const postInput = e.target.elements.postInput.value;
     const post = {
+      name: username,
       content: postInput,
-      date: new Date().toLocaleString(),
-      name: "Andrew"
+      date: new Date().toLocaleString()
     };
     setPosts([post, ...posts]);
     setShowPostCard(false);
   };
-
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   // Check if searchTerm exists in the user database
-  //   const { data: userData } = await client.query({
-  //     query: USER,
-  //     variables: { username: searchTerm },
-  //   });
-
-  //   // If user exists, navigate to the corresponding profile page
-  //   if (userData.user) {
-  //     navigate(`/profile/${userData.user.username}`);
-  //   } else {
-  //     alert("User not found!");
-  //   }
-  // };
-
-
   return (
     <div className="gradientBackground">
       <header className='header'>
@@ -119,14 +108,9 @@ export default function Homepage() {
             Word On The Street
           </p>
         </div>
-
         {/* This is the search bar */}
-
         {/* Render the search bar component here */}
         <SearchBar />
-
-
-
         {/* This is the homepage button */}
       </header>
       <nav className='sideNav'>
@@ -141,7 +125,7 @@ export default function Homepage() {
           </li>
           {/* This is the profile button */}
           <li title='Profile' data-title-delay='10'>
-            <Link to={`/profile/${data?.me.username}`}>
+            <Link to={`/profile/${username}`}>
               <button className='navButton'>
                 <CgProfile className='navIcon' />
                 <p className='navText'>
@@ -149,7 +133,6 @@ export default function Homepage() {
                 </p>
               </button>
             </Link>
-
           </li>
           {/* This is the logout button */}
           <li title='Logout' data-title-delay='10'>
@@ -164,36 +147,23 @@ export default function Homepage() {
           </li>
         </ul>
       </nav>
-
       {/* friends list to be edited */}
       <div className='friendsList'>
         <h2>Friends</h2>
-        {friends.slice(0, 3).map((friend) => (
-          <div className='friend' key={friend.id}>
-            <img src={friend.avatar} alt='Friend' />
-            <span>{friend.name}</span>
-          </div>
-        ))}
+        {FriendList()}
       </div>
-
       {/* This is the chatbox */}
       <div className='chatbox'>
         <MDBCol md="6" lg="7" xl="8">
           <MDBTypography listUnStyled>
             <li className="d-flex justify-content-between mb-4">
               <MDBCard>
-                <form className='postList'>
-                  {posts.map((post, index) => (
-                    <section className='post' key={index}>
-                      <p>{post.content}</p>
-                      <p>{post.date}</p>
-                    </section>
-                  ))}
-                </form>
+                {Chatbox()}
               </MDBCard>
             </li>
             <div id='bottom'>
               <div className='chatCard'>
+                {/* only thing that matters */}
                 <form onSubmit={handlePostSubmit}>
                   <textarea
                     onChange={handleInputChange}
@@ -207,9 +177,9 @@ export default function Homepage() {
                     </button>
                   </div>
                 </form>
+                {/* ^^^^^^^^^^^^^^^^^^^^^^^ */}
               </div>
             </div>
-
           </MDBTypography>
         </MDBCol>
       </div>

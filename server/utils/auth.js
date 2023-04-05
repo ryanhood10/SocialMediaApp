@@ -23,7 +23,6 @@ module.exports = {
     // // // verify token and get user data out of it
     try {
       const decoded = jwt.verify(token, secret);
-      console.log(decoded)
       req.user = decoded.data;
     } catch (error) {
       console.log(error)
