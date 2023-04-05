@@ -261,6 +261,24 @@ margin-right: 75px;
 MDBCardHeader {
   position: fixed;
 }
+.History {
+  height: fit-content;
+}
+.History div {
+  box-shadow: purple 0 0 5px;
+  border-radius: 10px;
+  width: 300px;
+  margin-top: 15px;
+  height: fit-content;
+}
+.chatbox li {
+  height: 200px;
+  border: white;
+}
+
+div .card {
+  border: none;
+}
 }
 
 @media only screen and (max-width: 600px) {
@@ -432,4 +450,20 @@ MDBCardHeader {
     display: flex;
     flex-direction: row;
   }
+
+  .History div {
+  box-shadow: purple 0 0 5px;
+  border-radius: 10px;
+  width: 200px;
+  margin-top: 15px;
+  height: fit-content;
+}
+.chatbox li {
+  height: 200px;
+  border: white;
+}
+
+div .card {
+  border: none;
+}
 }
