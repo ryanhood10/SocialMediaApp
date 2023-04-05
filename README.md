@@ -52,7 +52,10 @@ Start the client
 ```
 
 ## Screenshots
-
+<img width="952" alt="wos1" src="https://user-images.githubusercontent.com/87868537/229966730-4a513852-74af-4aed-aa49-5df061650dae.png">
+<img width="950" alt="wos2" src="https://user-images.githubusercontent.com/87868537/229966744-20d5c4c8-b1f5-4a5a-94ee-bd8efec48e06.png">
+<img width="952" alt="WOS3" src="https://user-images.githubusercontent.com/87868537/229966757-2ffbf3fa-672d-40c4-b24d-ba3dd379c71b.png">
+<img width="952" alt="WOS4" src="https://user-images.githubusercontent.com/87868537/229966767-edae350a-ca7b-4652-9cb9-148710ec0bf3.png">
 
 ## Contributing
 
