@@ -26,7 +26,6 @@ export default function Homepage() {
     const { loading, error, data } = useQuery(USER_PROFILE, {
       variables: { username: username }
     });
->>>>>>> main
     if (loading) return 'Loading...';
     if (error) return `Error: ${error.friend}`;
     // Access the friends array in the data object
