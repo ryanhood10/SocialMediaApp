@@ -33,7 +33,6 @@ const SignupForm = () => {
       // }
       // catch is catching for a wierd reason.
     // } catch (error) {
-    //   console.log(error)
     //   alert('An error occurred during signup. Please try again.');
     // }
 
@@ -42,7 +41,6 @@ const SignupForm = () => {
       const data = await signup({
         variables: { input: { username: username, email: email, password: password } },
       });
-      console.log(data)
       setUsername('');
       setEmail('');
       setPassword('');
