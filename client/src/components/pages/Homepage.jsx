@@ -17,24 +17,20 @@ import {
   MDBCard,
   MDBTypography,
 } from "mdb-react-ui-kit";
-
 export default function Homepage() {
   // how we navigate through pages
   const navigate = useNavigate();
-
   //queries
   // 1. friendlist query
   function FriendList() {
     const { loading, error, data } = useQuery(USER_PROFILE, {
       variables: { username: username }
     });
-
+>>>>>>> main
     if (loading) return 'Loading...';
     if (error) return `Error: ${error.friend}`;
-
     // Access the friends array in the data object
     const friendslist = data.user.friends
-
     return (
       //Render the friends array as needed
       <div>
@@ -46,17 +42,13 @@ export default function Homepage() {
       </div>
     );
   }
-
   // 2. messages query
   function Chatbox() {
     const { loading, error, data } = useQuery(CHAT);
-
     if (loading) return 'Loading...';
     if (error) return `Error: ${error.message}`;
-
     // Access the messages array in the data object
     const messages = data.messages;
-
     return (
       // Render the messages array as needed
       <div>
@@ -69,14 +61,11 @@ export default function Homepage() {
       </div>
     );
   }
-
   // NEW method of getting username
   const profile = Auth.getProfile()
   const username = profile.data.username
-
   // mutations
   const [addMessage, { error }] = useMutation(MESSAGES)
-
   // states
   // 1. message state
   const [message, setMessage] = useState('')
@@ -84,7 +73,6 @@ export default function Homepage() {
   // 2. post state
   const [showPostCard, setShowPostCard] = useState(false);
   const [posts, setPosts] = useState([]);
-
   // EVENTS
   // 1. message changes
   const handleInputChange = (e) => {
@@ -97,14 +85,12 @@ export default function Homepage() {
     Auth.logout()
     navigate("/")
   }
-  // 3. message post button 
+  // 3. message post button
   const handlePostSubmit = (e) => {
     e.preventDefault();
-
     const { data } = addMessage({
       variables: { input: { MessageText: message } },
     });
-
     const postInput = e.target.elements.postInput.value;
     const post = {
       name: username,
@@ -114,8 +100,6 @@ export default function Homepage() {
     setPosts([post, ...posts]);
     setShowPostCard(false);
   };
-
-
   return (
     <div className="gradientBackground">
       <header className='header'>
@@ -124,11 +108,9 @@ export default function Homepage() {
             Word On The Street
           </p>
         </div>
-
         {/* This is the search bar */}
         {/* Render the search bar component here */}
         <SearchBar />
-
         {/* This is the homepage button */}
       </header>
       <nav className='sideNav'>
@@ -151,7 +133,6 @@ export default function Homepage() {
                 </p>
               </button>
             </Link>
-
           </li>
           {/* This is the logout button */}
           <li title='Logout' data-title-delay='10'>
@@ -166,13 +147,11 @@ export default function Homepage() {
           </li>
         </ul>
       </nav>
-
       {/* friends list to be edited */}
       <div className='friendsList'>
         <h2>Friends</h2>
         {FriendList()}
       </div>
-
       {/* This is the chatbox */}
       <div className='chatbox'>
         <MDBCol md="6" lg="7" xl="8">
@@ -184,9 +163,6 @@ export default function Homepage() {
             </li>
             <div id='bottom'>
               <div className='chatCard'>
-
-
-
                 {/* only thing that matters */}
                 <form onSubmit={handlePostSubmit}>
                   <textarea
@@ -202,12 +178,8 @@ export default function Homepage() {
                   </div>
                 </form>
                 {/* ^^^^^^^^^^^^^^^^^^^^^^^ */}
-
-
-
               </div>
             </div>
-
           </MDBTypography>
         </MDBCol>
       </div>
