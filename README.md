@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# WORD ON THE STREET 
+## Description
+Word on the Street is a web-based chat application that allows users to join a chat room and chat with multiple users in real-time. 
+The application provides users with the ability to send and receive text messages. Users can sign up and create an account,
+change their usernames and profile pictures, and view a list of all the users in the room,including their usernames and profile pictures. 
+The chat application automatically saves chat history for each room, allowing users to view previous conversations.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
 
-## Available Scripts
+**Client & Server :** 
 
-In the project directory, you can run:
+React
+GraphQL with a Node.js 
+Express.js 
+Bootstrap
+MongoDB and the Mongoose ODM for the database
+HTML,JAVASCRIPT & CSS
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+After signing up and creating an account, users can join a chat room and start chatting with other users in real-time. 
+They can change their usernames and profile pictures, and send text messages, images, and emojis to other users in the room. 
+Users can view a list of all the users in the room and leave (sign out) the room at any time. The chat application automatically saves chat history for each room, allowing users to view previous conversations.
+## Run Locally
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone the project
+```bash
+  git clone https://github.com/JuanMullert/WOTS_PROJECT
+```
+Go to the project directory
 
-### `npm test`
+```bash
+  cd my-project
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install dependencies
 
-### `npm run build`
+```bash
+  npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Start the server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+  npm run start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Start the client 
 
-### `npm run eject`
+```bash
+  npm run start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Screenshots
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contributing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Contributions to Word on the Street are welcome! To contribute, fork the repository and create a pull request.
+Please ensure that your code adheres to the existing code style and passes all tests before submitting a pull request.
 
-## Learn More
+## Credit
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Andrew Young
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Juan Mullert
 
-### Code Splitting
+- Richard Mutunzi
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Jonathan Jobe
 
-### Analyzing the Bundle Size
+- Ryan Hood 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License 
 
-### Making a Progressive Web App
+See license in repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
