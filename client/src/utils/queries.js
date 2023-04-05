@@ -1,18 +1,21 @@
 import { gql } from '@apollo/client'
 
 export const USER_PROFILE = gql`
-query User($username: String!) {
-  user(username: $username) {
-    friends {
+  query User($username: String!) {
+    user(username: $username) {
+      _id
+      friends {
+        username
+      }
       username
-    }
-    username
-    messages {
-      MessageText
-      createdAt
+      messages {
+        MessageText
+        createdAt
+      }
     }
   }
-}`;
+`;
+
 
 export const CHAT = gql`
   query GetMessages {

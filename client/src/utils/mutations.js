@@ -26,6 +26,7 @@ mutation Login($input: LoginInput!) {
 export const ADDFRIEND = gql`
 mutation AddFriend($friendId: ID!) {
   addFriend(friendId: $friendId) {
+    username
     _id
   }
 }`
