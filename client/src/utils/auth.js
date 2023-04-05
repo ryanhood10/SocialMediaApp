@@ -1,9 +1,9 @@
-const jwtDecode = require('jwt-decode');
+import decode from 'jwt-decode';
 
 export default new class AuthService {
     // Get user data from the token
     getProfile() {
-        return jwtDecode(this.getToken());
+        return decode(this.getToken());
     }
     // Check if the user is logged in
     loggedIn() {
@@ -14,7 +14,7 @@ export default new class AuthService {
     // Check if the token is expired
     isTokenExpired(idToken) {
         try {
-            const decoded = jwtDecode(idToken);
+            const decoded = decode(idToken);
             if (decoded.exp < Date.now() / 1000) {
                 return true;
             } else return false;
@@ -28,8 +28,6 @@ export default new class AuthService {
     }
     // Authenticate the user, save the token to localStorage, and redirect to the home page
     login(idToken) {
-        console.log("This is the auth.js token")
-        console.log(idToken)
         localStorage.setItem('id_token', idToken);
     }
     // Remove the token from localStorage and redirect to the login page
