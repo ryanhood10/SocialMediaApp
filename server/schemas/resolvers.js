@@ -91,22 +91,24 @@ const resolvers = {
   
       throw new AuthenticationError('You need to be logged in!');
     },
-  
+    
     createMessage: async (parent, args, context) => {
-      // spread opporator should copy args and then append username to it to give it a user to refer to.  
       if (context.user) {
         const message = await Message.create({ MessageText: args.input.MessageText, username: context.user.username });
-
+    
         const updated_user = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { messages: message._id } },
           { new: true }
         );
-        
-  
-        return message;
-      };
+    
+        return {
+          MessageText: message.MessageText,
+          username: context.user.username,
+        };
+      }
     },
+    
   
     createReply: async (parent, { messageId, replyBody }, context) => {
       if (context.user) {

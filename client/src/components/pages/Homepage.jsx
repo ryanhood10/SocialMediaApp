@@ -7,8 +7,6 @@ import { BiLogOutCircle } from 'react-icons/bi'
 import '../../assets/homepage.css';
 import { useQuery } from "@apollo/client";
 import { CHAT, USER_PROFILE } from '../../utils/queries';
-import { useMutation } from '@apollo/client';
-import { MESSAGES } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 import SearchBar from '../Searchbar';
 import { client } from "../../App";
@@ -17,6 +15,7 @@ import {
   MDBCard,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import Chatbox from '../Chatbox';
 
 export default function Homepage() {
   // how we navigate through pages
@@ -39,31 +38,8 @@ export default function Homepage() {
       //Render the friends array as needed
       <div>
         {friendslist.map(friend => (
-          <div>
+          <div key={friend.username}>
             <p>{friend.username}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  // 2. messages query
-  function Chatbox() {
-    const { loading, error, data } = useQuery(CHAT);
-
-    if (loading) return 'Loading...';
-    if (error) return `Error: ${error.message}`;
-
-    // Access the messages array in the data object
-    const messages = data.messages;
-
-    return (
-      // Render the messages array as needed
-      <div>
-        {messages.map(message => (
-          <div key={message.createdAt}>
-            <p>{message.username}: {message.MessageText}</p>
-            <small>{message.createdAt}</small>
           </div>
         ))}
       </div>
@@ -74,47 +50,17 @@ export default function Homepage() {
   const profile = Auth.getProfile()
   const username = profile.data.username
 
-  // mutations
-  const [addMessage, { error }] = useMutation(MESSAGES)
-
   // states
-  // 1. message state
-  const [message, setMessage] = useState('')
   const [searchTerm, setSearchTerm] = useState(''); // new state for search term
   // 2. post state
   const [showPostCard, setShowPostCard] = useState(false);
   const [posts, setPosts] = useState([]);
 
-  // EVENTS
-  // 1. message changes
-  const handleInputChange = (e) => {
-    if (e.target.name === "postInput") {
-      setMessage(e.target.value)
-    }
-  }
   // 2. logout button
   const handleClick = (e) => {
     Auth.logout()
     navigate("/")
   }
-  // 3. message post button 
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-
-    const { data } = addMessage({
-      variables: { input: { MessageText: message } },
-    });
-
-    const postInput = e.target.elements.postInput.value;
-    const post = {
-      name: username,
-      content: postInput,
-      date: new Date().toLocaleString()
-    };
-    setPosts([post, ...posts]);
-    setShowPostCard(false);
-  };
-
 
   return (
     <div className="gradientBackground">
@@ -165,7 +111,7 @@ export default function Homepage() {
             </Link>
           </li>
         </ul>
-      </nav>
+        </nav>
 
       {/* friends list to be edited */}
       <div className='friendsList'>
@@ -179,35 +125,9 @@ export default function Homepage() {
           <MDBTypography listUnStyled>
             <li className="d-flex justify-content-between mb-4">
               <MDBCard>
-                {Chatbox()}
+                <Chatbox posts={posts} setPosts={setPosts} />
               </MDBCard>
             </li>
-            <div id='bottom'>
-              <div className='chatCard'>
-
-
-
-                {/* only thing that matters */}
-                <form onSubmit={handlePostSubmit}>
-                  <textarea
-                    onChange={handleInputChange}
-                    placeholder='Write something...'
-                    className='postInput'
-                    name='postInput'
-                  ></textarea>
-                  <div className='postbuttons'>
-                    <button type='submit' className='postButton'>
-                      <FiSend className='postIcon' />
-                    </button>
-                  </div>
-                </form>
-                {/* ^^^^^^^^^^^^^^^^^^^^^^^ */}
-
-
-
-              </div>
-            </div>
-
           </MDBTypography>
         </MDBCol>
       </div>
