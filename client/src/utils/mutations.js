@@ -33,7 +33,11 @@ mutation AddFriend($friendId: ID!) {
 export const MESSAGES = gql`
 mutation CreateMessage($input: MessageInput!) {
   createMessage(input: $input) {
+    _id
     MessageText
+    username
+    createdAt
   }
 }`
+
 

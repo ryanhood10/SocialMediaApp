@@ -15,10 +15,12 @@ query User($username: String!) {
 }`;
 
 export const CHAT = gql`
-query Messages {
-  messages {
-    MessageText
-    username
-    createdAt
+  query GetMessages {
+    messages {
+      _id
+      MessageText
+      username
+      createdAt
+    }
   }
-}`;
+`;
