@@ -2,7 +2,7 @@ body {
   background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
 }
 
-
+@media only screen and (min-width: 768px) {
 .homepageBody {
     display: flex;
     justify-content: center;
@@ -32,7 +32,6 @@ body {
   
   .sideNav li {
     padding: 10px;
-    /* border-bottom: 1px solid #ccc; */
     color: grey;
     list-style: none;
     margin-top: 50px;
@@ -55,13 +54,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-  /* make the header a positioned element */
     margin-top: 10px;
     position: sticky;
 }
 
 .searchForm {
-    position: absolute;  /* position the search form relative to the header */
+    position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -85,22 +83,6 @@ body {
     margin-left: 0.5rem;
 }
 
-/* .postButtonWrapper {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-} */
-/* .cardWrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 .chatCard {
   background-color: white;
@@ -112,38 +94,12 @@ body {
   flex-direction: row;
 }
 
-/* .postButtonWrapper {
-  position: relative;
-  z-index: 1;
-} */
-
- /* .cardWrapper form {
-  margin: 20px;
-  display: flex;
-  flex-direction: row;
-} */
-
-/* .cardWrapper form textarea {
-  width: 300px;
-  height: inherit;
-} */
-
-/* .cardWrapper form button {
-  padding: 10px;
-  margin-left: 10px;
-  border-radius: 100%;
-  margin-bottom: 10px;
-  background-color: white;
-  border: white;
-  padding-left: 25px;
-} */
-
-.newPostButton {
+/* .newPostButton {
   margin-left: 10px;
   margin-bottom: 15px;
   border: none;
   background: none;
-}
+} */
 
  .searchButton:hover,
 .newPostButton:hover,
@@ -154,36 +110,9 @@ body {
   color: whitesmoke;
 }
 
-/* .cardWrapper {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-} */
-
-/* .chatCard {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 80%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: row;
-} */
-
 .post {
-  border-color: #333;
-    outline: #333;
     margin-top: 75px;
     width: 300px;
-    /* margin-left: 775px; */
-    /* border: solid; */
     border-radius: 8px;
     box-shadow: rgb(174, 121, 224) 0 0 10px;
     background: #e7e5e5
@@ -199,19 +128,6 @@ body {
   cursor: pointer;
   width: 10px;
 }
-
-/* .cancelButton {
-  width: 10px;
-  border: none;
-  background-color: white;
-  float: left;
-} */
-
-/* .homeIcon,
-.profileIcon,
-.logoutIcon {
-  background: none;
-} */
 
 .logo {
   position: absolute;
@@ -241,9 +157,6 @@ color: whitesmoke;
   font-family: fantasy;
 }
 
-/* .navButton1 {
-  margin-left: 25px;
-} */
 .navText1 {
   width: 80px;
 }
@@ -347,4 +260,210 @@ margin-right: 75px;
 
 MDBCardHeader {
   position: fixed;
+}
+.History {
+  height: fit-content;
+}
+.History div {
+  box-shadow: purple 0 0 5px;
+  border-radius: 10px;
+  width: 300px;
+  margin-top: 15px;
+  height: fit-content;
+}
+.chatbox li {
+  height: 200px;
+  border: white;
+}
+
+div .card {
+  border: none;
+}
+}
+
+@media only screen and (max-width: 600px) {
+
+  /* CSS for mobile devices */
+  .homepageBody {
+    /* adjust height and padding for smaller screens */
+    height: auto;
+    padding: 0;
+  }
+
+  .sideNav {
+    /* adjust width and position for smaller screens */
+    /* width: 100%; */
+    margin-right: 500px;
+  }
+
+  .sideNav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 50px;
+  }
+
+  /* adjust font-size and padding for smaller screens */
+  .sideNav a {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+
+
+  .header {
+    /* adjust padding and font-size for smaller screens */
+    padding: 0.5rem;
+    font-size: 16px;
+  }
+
+  .searchInput {
+    /* padding: 0.5rem 1rem; */
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.90rem;
+    box-shadow: white 0 0 5px;
+    max-width: 300px;
+  }
+
+  .searchButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+
+  .logo {
+    font-family: fantasy;
+    text-shadow: white 0 0 5px;
+    margin-right: 32px;
+  }
+
+  .navButton,
+  .navButton1 {
+    background: none;
+    border: none;
+    font-weight: 300;
+    font-family: fantasy;
+  }
+
+  .chatbox {
+    margin-left: 700px;
+    padding: 45px;
+    margin-top: 100px;
+    margin-bottom: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: whitesmoke 0 0 5px;
+  }
+
+  
+  .postButton {
+    margin-top: 0px;
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  #bottom {
+    display: flex;
+    float: row;
+  }
+
+  form textarea {
+    height: 35px;
+    width: 150px;
+  }
+
+  form .postbuttons {
+    margin-left: 15px;
+  }
+
+  .searchButton:hover,
+  .newPostButton:hover,
+  .homeIcon:hover,
+  .profileIcon:hover,
+  .logoutIcon:hover {
+    transform: scale(1.1);
+    color: whitesmoke;
+  }
+
+  .post {
+    margin-top: 25px;
+    width: 150px;
+    border-radius: 8px;
+    box-shadow: rgb(174, 121, 224) 0 0 5px;
+    background: #e7e5e5
+  }
+
+  /* adjust font-size and margin for smaller screens */
+  .post p {
+    font-size: 14px;
+    margin: 6px;
+  }
+
+  /* adjust margin for smaller screens */
+  .friendsList {
+    width: 250px;
+    padding: 10px;
+    background-color: whitesmoke;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    margin-right: 43px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: whitesmoke 0 0 5px;
+    height: inherit;
+  }
+
+  /* adjust margin for smaller screens */
+  .chatbox {
+    margin: 50px;
+    width: auto;
+    height: auto;
+  }
+
+  /* adjust margin and padding for smaller screens */
+  #bottom {
+    bottom: 0;
+    left: 0;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  /* adjust font-size and margin for smaller screens */
+  .friend span {
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
+  .chatCard {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .History div {
+  box-shadow: purple 0 0 5px;
+  border-radius: 10px;
+  width: 200px;
+  margin-top: 15px;
+  height: fit-content;
+}
+.chatbox li {
+  height: 200px;
+  border: white;
+}
+
+div .card {
+  border: none;
+}
 }

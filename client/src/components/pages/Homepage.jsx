@@ -15,25 +15,22 @@ import {
   MDBCard,
   MDBTypography,
 } from "mdb-react-ui-kit";
+
 import Chatbox from '../Chatbox';
 
 export default function Homepage() {
   // how we navigate through pages
   const navigate = useNavigate();
-
   //queries
   // 1. friendlist query
   function FriendList() {
     const { loading, error, data } = useQuery(USER_PROFILE, {
       variables: { username: username }
     });
-
     if (loading) return 'Loading...';
     if (error) return `Error: ${error.friend}`;
-
     // Access the friends array in the data object
     const friendslist = data.user.friends
-
     return (
       //Render the friends array as needed
       <div>
@@ -46,6 +43,7 @@ export default function Homepage() {
     );
   }
 
+
   // NEW method of getting username
   const profile = Auth.getProfile()
   const username = profile.data.username
@@ -55,6 +53,8 @@ export default function Homepage() {
   // 2. post state
   const [showPostCard, setShowPostCard] = useState(false);
   const [posts, setPosts] = useState([]);
+
+
 
   // 2. logout button
   const handleClick = (e) => {
@@ -70,11 +70,9 @@ export default function Homepage() {
             Word On The Street
           </p>
         </div>
-
         {/* This is the search bar */}
         {/* Render the search bar component here */}
         <SearchBar />
-
         {/* This is the homepage button */}
       </header>
       <nav className='sideNav'>
@@ -97,7 +95,6 @@ export default function Homepage() {
                 </p>
               </button>
             </Link>
-
           </li>
           {/* This is the logout button */}
           <li title='Logout' data-title-delay='10'>
@@ -111,23 +108,25 @@ export default function Homepage() {
             </Link>
           </li>
         </ul>
-        </nav>
+
+     
+      </nav>
 
       {/* friends list to be edited */}
       <div className='friendsList'>
         <h2>Friends</h2>
         {FriendList()}
       </div>
-
       {/* This is the chatbox */}
       <div className='chatbox'>
         <MDBCol md="6" lg="7" xl="8">
           <MDBTypography listUnStyled>
-            <li className="d-flex justify-content-between mb-4">
+            <li className="d-flex justify-content-between mb-4 Chat">
               <MDBCard>
                 <Chatbox posts={posts} setPosts={setPosts} />
               </MDBCard>
             </li>
+
           </MDBTypography>
         </MDBCol>
       </div>

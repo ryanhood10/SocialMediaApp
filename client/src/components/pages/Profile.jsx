@@ -107,16 +107,6 @@ export default function Profile() {
                 </button>
               </Link>
             </li>
-            <li title='Profile' data-title-delay='10'>
-              <Link to='/Profile'>
-                <button className='navButton'>
-                  <CgProfile className='navIcon' />
-                  <p className='navText'>
-                    Profile
-                  </p>
-                </button>
-              </Link>
-            </li>
             <li title='Logout' data-title-delay='10'>
               <Link to='/'>
                 <button 

@@ -1,3 +1,4 @@
+@media only screen and (min-width: 768px) {
 .signform {
     display: flex;
     background-color: rgba(114, 110, 110, 0.178);;
@@ -56,3 +57,14 @@
   .thebtn {
     color: black;
   }
+}
+
+@media only screen and (max-width: 768px) {
+.imglogo {
+    width: 100%;
+  }
+
+  .signform {
+    height: inherit;
+  }
+}
