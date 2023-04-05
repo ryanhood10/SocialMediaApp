@@ -47,11 +47,11 @@ export default function Homepage() {
     if (loading) return 'Loading...';
     if (error) return `Error: ${error.message}`;
     // Access the messages array in the data object
-    const messages = data.messages;
+    const messages = data.messages.slice(0, 7);
     return (
       // Render the messages array as needed
-      <div>
-        {messages.map(message => (
+      <div className='History'>
+        {messages.slice(0, 7).map(message => (
           <div key={message.createdAt}>
             <p>{message.username}: {message.MessageText}</p>
             <small>{message.createdAt}</small>
@@ -155,7 +155,7 @@ export default function Homepage() {
       <div className='chatbox'>
         <MDBCol md="6" lg="7" xl="8">
           <MDBTypography listUnStyled>
-            <li className="d-flex justify-content-between mb-4">
+            <li className="d-flex justify-content-between mb-4 Chat">
               <MDBCard>
                 {Chatbox()}
               </MDBCard>
