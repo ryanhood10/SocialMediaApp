@@ -5,6 +5,10 @@ The application provides users with the ability to send and receive text message
 change their usernames and profile pictures, and view a list of all the users in the room,including their usernames and profile pictures. 
 The chat application automatically saves chat history for each room, allowing users to view previous conversations.
 
+## Deployment Link
+
+https://wotsproject.herokuapp.com/
+
 ## Tech Stack
 
 **Client & Server :** 
